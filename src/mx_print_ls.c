@@ -1,0 +1,21 @@
+#include "uls.h"
+#include <stdio.h>
+const int LEN = 8;
+
+void mx_print_ls(char **files, int file_n, int max_len, int len_terminal) {
+    int row = LEN * (max_len / LEN) + LEN;
+    int cols = len_terminal / row;
+    int rows = file_n / cols;
+
+    if (file_n % cols != 0)
+        rows++;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (file_n == j * rows + i)
+                mx_printstr(files[j * rows + i]);
+            if (file_n > j * rows + i)
+                mx_print_format_str(files[j * rows + i], 'l', ' ', row);
+        }
+        mx_printchar('\n');
+    }
+}
