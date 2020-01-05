@@ -1,16 +1,13 @@
 #include "libmx.h"
 
 char *mx_strcat(char *restrict s1, const char *restrict s2) {
-    int s1_size = mx_strlen(s1);
-    int s2_size = mx_strlen(s2);
-    int i = s1_size;
-    int j = 0;
+    int len_s1 = mx_strlen(s1);
+    int len_s2 = mx_strlen(s2);
 
-    while (i < (s1_size + s2_size)){
-        s1[i] = s2[j];
-        i++;
-        j++;
+    for (int i = len_s1; i < len_s1 + len_s2; i++) {
+        s1[i] = *s2;
+        s2++;
     }
-    s1[i++] = '\0';
-    return s1;
+    s1[len_s1 + len_s2] = '\0';
+    return s1;    
 }

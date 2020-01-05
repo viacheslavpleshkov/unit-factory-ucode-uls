@@ -1,16 +1,12 @@
 #include "libmx.h"
 
 char *mx_strnew(const int size) {
-    char *memory = NULL;
-    int i = 0;
+    char *str = NULL;
 
     if (size < 0)
         return NULL;
-    memory = (char *)malloc((size + 1) * sizeof(char));
-    while (i < size) {
-        memory[i] = '\0';
-        i++;
-    }
-    memory[i] = '\0';
-    return memory;
+    str = malloc(size + 1);
+    for (int i = 0; i <= size; i++)
+        str[i] = '\0';
+    return str;
 }
