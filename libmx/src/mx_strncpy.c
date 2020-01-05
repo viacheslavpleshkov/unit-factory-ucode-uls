@@ -3,9 +3,11 @@
 char *mx_strncpy(char *dst, const char *src, int len) {
     int i = 0;
 
-    while (src[i] && i != len) {
+    for (; i < len && src[i]; i++)  
         dst[i] = src[i];
-        i++;
-    }
+
+    for (; i < len; i++)
+        dst[i] = '\0';
+
     return dst;
 }
