@@ -12,7 +12,7 @@ static int get_max_len(char **files) {
 
 
 void mx_print_ls(t_file **files, int file_n, char *opt) {
-    char **files_name = mx_create_char_arr(file_n + 1);
+    char **files_name = mx_create_char_arr(file_n + 1); //массив для хранения имен файлов
     
     for (int i = 0; i < file_n; i++)
         files_name[i] = mx_strdup(files[i]->print_name);
