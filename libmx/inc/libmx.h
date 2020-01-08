@@ -1,15 +1,14 @@
-#ifndef libmx_h
-#define libmx_h
+#ifndef LIBMX_H
+#define LIBMX_H
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include <fcntl.h>
 
-
 typedef struct s_list {
-void *data;
-struct s_list *next;
+    void *data;
+    struct s_list *next;
 } t_list;
 
 int mx_atoi(const char *str);
@@ -18,7 +17,7 @@ int mx_bubble_sort(char **arr, int size);
 int mx_count_substr(const char *str, const char *sub);
 int mx_count_words(const char *str, char delimiter);
 int mx_count_words_space(const char *str);
-t_list  *mx_create_node(void *data);
+t_list *mx_create_node(void *data);
 char *mx_del_extra_spaces(const char *str);
 void mx_del_strarr(char ***arr);
 char *mx_file_to_str(const char *file);
@@ -78,5 +77,5 @@ void mx_swap_char(char *s1, char *s2);
 void mx_swap_str(char **s1, char **s2);
 int mx_tolower(int c);
 int mx_toupper(int c);
-#endif
 
+#endif

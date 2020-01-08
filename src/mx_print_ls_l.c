@@ -47,13 +47,13 @@ void mx_print_ls_l(t_file **files, int file_n, char *opt) {
         mx_printstr(mx_get_rwx_str(files[i]->mode));
         mx_printstr(" ");
         mx_printstr(" ");
-        mx_print_format_str(mx_itoa((int)files[i]->nlink), 'r', ' ', max_nlink_len);
+        mx_until_print_format_str(mx_itoa((int)files[i]->nlink), 'r', ' ', max_nlink_len);
         mx_printstr(" ");
         mx_printstr(files[i]->uid_name);
         mx_printstr("  ");
         mx_printstr(files[i]->gid_name);
         mx_printstr("  ");
-        mx_print_format_str(mx_itoa((int)files[i]->size), 'r', ' ', max_size_len);
+        mx_until_print_format_str(mx_itoa((int)files[i]->size), 'r', ' ', max_size_len);
         mx_printstr(" ");
         mx_printstr(time_str);
         mx_printstr(" ");
