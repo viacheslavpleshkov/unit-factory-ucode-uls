@@ -23,7 +23,7 @@
 #define HIDDEN_a 1
 #define HIDDEN_A 2
 
-typedef struct s_file {
+typedef struct s_ls {
     char *name;              //полное имя файла, например ./src/main.c
     char *print_name;        //имя которое будет выведено на конслоль, например main.c
     char *acl_inf;           // нужно для флага l (дополнительная информация)
@@ -39,26 +39,26 @@ typedef struct s_file {
     long int atime;          //время последнего доступа
     long int mtime;          //время последнего изменения
     long int ctime;          //время последнего изменения прав доступа
-} t_file;
+} t_ls;
 
 int main(int argc, char **argv);
-void mx_begin(char **files_name, char *opt);             //начало программы
+void mx_ls(char **files_name, char *flags);             //начало программы
 char **mx_create_files_arr(char **argv, int argc);       //получение файлов из введенных пользователей параметров
-char *mx_create_opt_str(char **argv, int argc);          // получение флагов из введенных пользователем параметров
+char *mx_create_flags_str(char **argv, int argc);          // получение флагов из введенных пользователем параметров
 int mx_files_in_dir(char *dir, int headen);              //возвращает к-ство файлов в директории
-char *mx_get_acl_inf(const char *file);                  //получение acl информации, нужно для флага l
-char *mx_get_gid_name(int st_gid);                       //получение имени группы
-t_file *mx_get_lstat(const char *file);                  //получение структуры stat
-char *mx_get_print_name(const char *file);               //получение имени для вывода на консоль
-char *mx_get_rwx_str(unsigned short int file_mode);      //нужно для флага l
+char *mx_ls_get_acl_inf(const char *file);                  //получение acl информации, нужно для флага l
+char *mx_ls_get_gid_name(int st_gid);                       //получение имени группы
+t_ls *mx_get_lstat(const char *file);                  //получение структуры stat
+char *mx_ls_get_print_name(const char *file);               //получение имени для вывода на консоль
+char *mx_ls_get_rwx_str(unsigned short int file_mode);      //нужно для флага l
 int mx_get_terminal_width();                             // получение ширины терминала
-char mx_get_type(unsigned short int file_mode);          //получение типа файла(файл, директория, ссылка и т.д)
-char *mx_get_uid_name(int st_uid);                       //получение имени пользователя
-void mx_loop(char *direct, char **inp_files, char *opt); //пока не нужно
-void mx_print_ls(t_file **files, int file_n, char *opt); //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
-void mx_print_ls_C(char **files, int file_n, int max_len, int len_terminal);
-void mx_print_ls_l(t_file **files, int file_n, char *opt);
-void mx_print_lstat(t_file *file);         //эта функция мне нужна для тестов, потом ее нужно будет удалить
+char mx_ls_get_type(unsigned short int file_mode);          //получение типа файла(файл, директория, ссылка и т.д)
+char *mx_ls_get_uid_name(int st_uid);                       //получение имени пользователя
+void mx_ls_loop(char **files_name, char *flags); //главный цикл
+void mx_ls_print(t_ls **files, int file_n, char *flags); //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
+void mx_ls_print_C(char **files, int file_n, int max_len, int len_terminal);
+void mx_ls_print_l(t_ls **files, int file_n, char *flags);
+void mx_ls_printtat(t_ls *file);         //эта функция мне нужна для тестов, потом ее нужно будет удалить
 char **mx_read_dir(char *dir, int headen); //возвращает все файлы в этой директории
 
 char **mx_until_create_char_arr(int number);

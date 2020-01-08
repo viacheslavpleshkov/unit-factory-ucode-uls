@@ -11,16 +11,16 @@ static int get_max_len(char **files) {
 }
 
 
-void mx_print_ls(t_file **files, int file_n, char *opt) {
+void mx_ls_print(t_ls **files, int file_n, char *flags) {
     char **files_name = mx_until_create_char_arr(file_n + 1); //массив для хранения имен файлов
     
     for (int i = 0; i < file_n; i++)
         files_name[i] = mx_strdup(files[i]->print_name);
 
-    if (mx_get_char_index(opt, 'l') >= 0)
-        mx_print_ls_l(files, file_n, opt);
-    else if (mx_get_char_index(opt, '1') >= 0)
+    if (mx_get_char_index(flags, 'l') >= 0)
+        mx_ls_print_l(files, file_n, flags);
+    else if (mx_get_char_index(flags, '1') >= 0)
         mx_print_strarr(files_name, "\n");
     else
-        mx_print_ls_C(files_name, file_n, get_max_len(files_name), mx_get_terminal_width());
+        mx_ls_print_C(files_name, file_n, get_max_len(files_name), mx_get_terminal_width());
 }

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_print_lstat(t_file *file) {
+void mx_print_lstat(t_ls *file) {
     if (file != NULL) {
         mx_printstr("\nFile name: ");
         mx_printstr(file->name);

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char *mx_get_print_name(const char *file) {
+char *mx_ls_get_print_name(const char *file) {
 
     for (int i = mx_strlen(file) - 1; i != 0; i--)
         if (file[i] == '/') 
