@@ -9,12 +9,12 @@ static int get_hidden(char *opt) {
         return HIDDEN_NOT;
 }
 
-int main (int argc, char **argv) {
+int main(int argc, char **argv) {
     char **files = mx_create_files_arr(argv, argc);
     char *opt = mx_create_opt_str(argv, argc);
 
     if (!files[0])
-        mx_begin(mx_read_dir(".", get_hidden(opt)), opt);   
+        mx_begin(mx_read_dir(".", get_hidden(opt)), opt);
     else
         mx_begin(files, opt);
     return 0;
