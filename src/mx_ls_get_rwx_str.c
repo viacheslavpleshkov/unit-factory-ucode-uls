@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char *mx_get_rwx_str(unsigned short int file_mode) {
+char *mx_ls_get_rwx_str(unsigned short int file_mode) {
     char *result = mx_strdup("---------");
 
     for (int i = 0; i < 9; i++)

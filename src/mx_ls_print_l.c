@@ -9,7 +9,7 @@ static int get_len_number(unsigned long long int number) {
     return len;
 }
 
-static int get_max_nlink(t_file **files) {
+static int get_max_nlink(t_ls **files) {
     unsigned int max_nlink = 0;
 
     for (int i = 0; files[i]; i++)
@@ -18,7 +18,7 @@ static int get_max_nlink(t_file **files) {
     return get_len_number(max_nlink);
 }
 
-static int get_max_size(t_file **files) {
+static int get_max_size(t_ls **files) {
     long long int max_size = 0;
 
     for (int i = 0; files[i]; i++)
@@ -27,7 +27,7 @@ static int get_max_size(t_file **files) {
     return get_len_number(max_size);
 }
 
-void mx_print_ls_l(t_file **files, int file_n, char *opt) {
+void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
     int max_nlink_len = get_max_nlink(files);
     int max_size_len = get_max_size(files);
     char *time_str = NULL;
@@ -44,7 +44,7 @@ void mx_print_ls_l(t_file **files, int file_n, char *opt) {
         temp = ctime(&files[i]->mtime);
         time_str = mx_strndup(&temp[4], 12);
         mx_printchar(files[i]->type);
-        mx_printstr(mx_get_rwx_str(files[i]->mode));
+        mx_printstr(mx_ls_get_rwx_str(files[i]->mode));
         mx_printstr(" ");
         mx_printstr(" ");
         mx_until_print_format_str(mx_itoa((int)files[i]->nlink), 'r', ' ', max_nlink_len);

@@ -1,10 +1,10 @@
 #include "uls.h"
 
-static t_file **create_struct_arr(int files_number) {
-    t_file **head = malloc(sizeof(t_file *) * (files_number + 1));
+static t_ls **create_struct_arr(int files_number) {
+    t_ls **head = malloc(sizeof(t_ls *) * (files_number + 1));
 
     for (int i = 0; i < files_number; i++)
-        head[i] = malloc(sizeof(t_file));
+        head[i] = malloc(sizeof(t_ls));
     head[files_number] = NULL;
     return head;
 }
@@ -18,10 +18,10 @@ static int size_arr(char **files_name) {
     return i;
 }
 
-static int get_hidden(char *opt) {
-    if (mx_get_char_index(opt, 'a') >= 0)
+static int get_hidden(char *flags) {
+    if (mx_get_char_index(flags, 'a') >= 0)
         return HIDDEN_a;
-    else if (mx_get_char_index(opt, 'A') >= 0)
+    else if (mx_get_char_index(flags, 'A') >= 0)
         return HIDDEN_A;
     else
         return HIDDEN_NOT;
@@ -34,25 +34,25 @@ static bool check_symbol(char *print_name) {
         return true;
 }
 
-void mx_begin(char **files_name, char *opt) {
+void mx_ls_loop(char **files_name, char *flags) {
     int file_n = size_arr(files_name);
-    t_file **files = create_struct_arr(file_n); //массив структур файлов
+    t_ls **files = create_struct_arr(file_n); //массив структур файлов
 
     for (int i = 0; files_name[i]; i++)
         files[i] = mx_get_lstat(files_name[i]); //заполнение массива структурами
 
     //здесь нужно вставить функцию сортировки
 
-    mx_print_ls(files, file_n, opt); //печать файлов
+    mx_ls_print(files, file_n, flags); //печать файлов
 
     for (int i = 0; files[i]; i++)
-        if (files[i]->type == 'd' && mx_get_char_index(opt, 'R') >= 0)
+        if (files[i]->type == 'd' && mx_get_char_index(flags, 'R') >= 0)
         {                                                                                //если файл - директория и есть флаг R
-            if (mx_get_char_index(opt, 'a') >= 0 && !check_symbol(files[i]->print_name)) //проверка на . ..
+            if (mx_get_char_index(flags, 'a') >= 0 && !check_symbol(files[i]->print_name)) //проверка на . ..
                 continue;
             mx_printstr("\n");
             mx_printstr(files[i]->name); //печатает имя директории
             mx_printstr(":\n");
-            mx_begin(mx_read_dir(files[i]->name, get_hidden(opt)), opt); // печатает содержимое директории
+            mx_ls_loop(mx_read_dir(files[i]->name, get_hidden(flags)), flags); // печатает содержимое директории
         }
 }

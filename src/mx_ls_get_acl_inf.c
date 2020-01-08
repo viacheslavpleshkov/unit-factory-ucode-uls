@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char *mx_get_acl_inf(const char *file) {
+char *mx_ls_get_acl_inf(const char *file) {
     acl_t acl_file;
     char *str = NULL;
 
