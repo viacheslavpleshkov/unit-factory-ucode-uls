@@ -9,22 +9,13 @@ static t_ls **create_struct_arr(int files_number) {
     return head;
 }
 
-static int size_arr(char **files_name) {
-    int i = 0;
-
-    if (files_name)
-        for (i = 0; files_name[i]; i++)
-            ;
-    return i;
-}
-
 static int get_hidden(char *flags) {
     if (mx_get_char_index(flags, 'a') >= 0)
-        return HIDDEN_a;
+        return LS_HIDDEN_a;
     else if (mx_get_char_index(flags, 'A') >= 0)
-        return HIDDEN_A;
+        return LS_HIDDEN_A;
     else
-        return HIDDEN_NOT;
+        return LS_HIDDEN_NOT;
 }
 
 static bool check_symbol(char *print_name) {
@@ -35,7 +26,7 @@ static bool check_symbol(char *print_name) {
 }
 
 void mx_ls_loop(char **files_name, char *flags) {
-    int file_n = size_arr(files_name);
+    int file_n = mx_get_size_arr(files_name);
     t_ls **files = create_struct_arr(file_n); //массив структур файлов
 
     for (int i = 0; files_name[i]; i++)
