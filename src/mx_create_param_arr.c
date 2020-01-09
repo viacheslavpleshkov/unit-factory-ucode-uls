@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char **mx_create_files_arr(char **argv, int argc) {
+char **mx_create_param_arr(char **argv, int argc) {
     char **files = mx_until_create_char_arr(argc);
     int k = 0;
     int j = 0;

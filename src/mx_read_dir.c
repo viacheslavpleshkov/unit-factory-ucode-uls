@@ -1,9 +1,9 @@
 #include "uls.h"
 
 static bool get_result(char *d_name, int headen, int *i) {
-    if (headen == HIDDEN_NOT && d_name[0] == '.')
+    if (headen == LS_HIDDEN_NOT && d_name[0] == '.')
         *i -= 1;
-    else if (headen == HIDDEN_A && (!mx_strcmp(d_name, ".")
+    else if (headen == LS_HIDDEN_A && (!mx_strcmp(d_name, ".")
         || !mx_strcmp(d_name, "..")))
             *i -=1;
     else

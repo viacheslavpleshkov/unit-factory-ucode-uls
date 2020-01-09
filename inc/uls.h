@@ -19,9 +19,9 @@
 #define GET_STAT 1
 #define GET_LSTAT 2
 
-#define HIDDEN_NOT 0
-#define HIDDEN_a 1
-#define HIDDEN_A 2
+#define LS_HIDDEN_NOT 0
+#define LS_HIDDEN_a 1
+#define LS_HIDDEN_A 2
 
 typedef struct s_ls {
     char *name;              //полное имя файла, например ./src/main.c
@@ -41,9 +41,11 @@ typedef struct s_ls {
     long int ctime;          //время последнего изменения прав доступа
 } t_ls;
 
+void mx_print_lstat(t_ls *file);
 int main(int argc, char **argv);
-void mx_ls(char **files_name, char *flags);             //начало программы
-char **mx_create_files_arr(char **argv, int argc);       //получение файлов из введенных пользователей параметров
+int mx_get_size_arr(char **str_arr);
+void mx_ls(char **str_arr, char *flags);             //начало программы
+char **mx_create_param_arr(char **argv, int argc);       //получение файлов из введенных пользователей параметров
 char *mx_create_flags_str(char **argv, int argc);          // получение флагов из введенных пользователем параметров
 int mx_files_in_dir(char *dir, int headen);              //возвращает к-ство файлов в директории
 char *mx_ls_get_acl_inf(const char *file);                  //получение acl информации, нужно для флага l
