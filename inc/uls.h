@@ -62,6 +62,8 @@ void mx_ls_print_C(char **files, int file_n, int max_len, int len_terminal);
 void mx_ls_print_l(t_ls **files, int file_n, char *flags);
 void mx_ls_printtat(t_ls *file);         //эта функция мне нужна для тестов, потом ее нужно будет удалить
 char **mx_read_dir(char *dir, int headen); //возвращает все файлы в этой директории
+t_ls **mx_ls_create_struct_arr(int files_number);
+int mx_ls_get_hidden(char *flags);
 
 char **mx_until_create_char_arr(int number);
 void mx_until_print_format_str(char *str, char location, char symbol, int size);
