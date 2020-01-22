@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_ls(char **str_arr, char *flags) {
+void mx_ls(char  **str_arr, char *flags) {
     // char *new_flags = mx_clear_flags(char *flags);
     int str_size = mx_get_size_arr(str_arr);
     t_ls **files = mx_ls_create_struct_arr(str_size);
@@ -13,7 +13,6 @@ void mx_ls(char **str_arr, char *flags) {
     for (int i = 0; i < str_size; i++)
         files[i] = mx_get_lstat(str_arr[i]);
     files[str_size] = NULL;
-    
     for (int i = 0; files[i]; i++) {
         files_without_dir[k] = mx_strdup(files[i]->name);
         if (files[i]-> type != 'd')
@@ -21,7 +20,6 @@ void mx_ls(char **str_arr, char *flags) {
         else
             mx_strdel(&files_without_dir[k]);
     }
-    
     mx_ls_loop(files_without_dir, flags);
     
     for (int i = 0; files[i]; i++)
