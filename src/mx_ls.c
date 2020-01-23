@@ -20,7 +20,6 @@ void mx_ls(char  **str_arr, char *flags) {
             mx_strdel(&files_without_dir[k]);
     }
     mx_ls_loop(files_without_dir, flags);
-    
     for (int i = 0; files[i]; i++)
         if (files[i]->type == 'd') {
             mx_printstr(files[i]->print_name);
