@@ -1,6 +1,6 @@
 #include "uls.h"
 
-int mx_get_size_arr(char **str_arr) {
+int mx_until_get_size_arr(char **str_arr) {
     int i = 0;
 
     if (str_arr)

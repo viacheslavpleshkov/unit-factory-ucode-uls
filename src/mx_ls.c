@@ -1,8 +1,7 @@
 #include "uls.h"
 
 void mx_ls(char  **str_arr, char *flags) {
-    // char *new_flags = mx_clear_flags(char *flags);
-    int str_size = mx_get_size_arr(str_arr);
+    int str_size = mx_until_get_size_arr(str_arr);
     t_ls **files = mx_ls_create_struct_arr(str_size);
     char **files_without_dir = mx_until_create_char_arr(str_size);
     int k = 0;
