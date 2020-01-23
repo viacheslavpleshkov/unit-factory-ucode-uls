@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_ls_print_C(char **files, int file_n, int max_len, int len_terminal) {
+void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal) {
     int row = LEN_TAB * (max_len / LEN_TAB) + LEN_TAB;
     int cols = len_terminal / row;
     int rows = file_n / cols;

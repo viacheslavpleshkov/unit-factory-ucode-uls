@@ -22,5 +22,5 @@ void mx_ls_print(t_ls **files, int file_n, char *flags) {
     else if (mx_get_char_index(flags, '1') >= 0)
         mx_print_strarr(files_name, "\n");
     else
-        mx_ls_print_C(files_name, file_n, get_max_len(files_name), mx_get_terminal_width());
+        mx_ls_print_big_c(files_name, file_n, get_max_len(files_name), mx_get_terminal_width());
 }
