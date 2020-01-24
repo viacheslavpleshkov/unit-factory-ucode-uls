@@ -87,4 +87,7 @@ void mx_ls_sort_flag_u(t_ls **arr);                                 //сорти
 int mx_until_get_size_arr(char **str_arr);
 char **mx_until_create_char_arr(int number);
 void mx_until_print_format_str(char *str, char location, char symbol, int size);
+int mx_until_get_len_number(unsigned long long int number);
+int mx_untill_get_max_nlink(t_ls **files);
+int mx_untill_get_max_size(t_ls **files);
 #endif
