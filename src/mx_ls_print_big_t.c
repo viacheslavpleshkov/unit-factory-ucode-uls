@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
+void mx_ls_print_big_t(t_ls **files, int file_n, char *opt) {
     int max_nlink_len = mx_untill_get_max_nlink(files);
     int max_size_len = mx_untill_get_max_size(files);
     char *time_str = NULL;
@@ -15,7 +15,7 @@ void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
 
     for (int i = 0; i < file_n; i++) {
         temp = ctime(&files[i]->mtime);
-        time_str = mx_strndup(&temp[4], 12);
+        time_str = mx_strndup(&temp[4], 20);
         mx_printchar(files[i]->type);
         mx_printstr(mx_ls_get_rwx_str(files[i]->mode));
         mx_printstr(" ");
