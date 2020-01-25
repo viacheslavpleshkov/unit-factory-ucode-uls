@@ -20,8 +20,8 @@ void mx_ls_loop(char **files_name, char *flags) {
     
 
     for (int i = 0; files[i]; i++)
-        if (files[i]->type == 'd' && mx_get_char_index(flags, 'R') >= 0) {//если файл - директория и есть флаг R
-            if (mx_get_char_index(flags, 'a') >= 0 && !check_symbol(files[i]->print_name)) //проверка на . ..
+        if (files[i]->type == 'd' && mx_ls_check_flag(flags, 'R')) {//если файл - директория и есть флаг R
+            if (mx_ls_check_flag(flags, 'a') && !check_symbol(files[i]->print_name)) //проверка на . ..
                 continue;
             mx_printstr("\n");
             mx_printstr(files[i]->name); //печатает имя директории

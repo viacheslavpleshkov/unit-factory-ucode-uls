@@ -21,11 +21,11 @@ SRC		= 	main.c mx_ls.c mx_ls_loop.c mx_files_in_dir.c \
 			mx_ls_get_gid_name.c mx_get_lstat.c mx_ls_get_print_name.c \
 			mx_get_terminal_width.c mx_ls_get_type.c mx_ls_print.c \
 			mx_ls_print_big_c.c mx_ls_print_l.c mx_ls_print_big_t.c \
-			mx_print_lstat.c mx_ls_sort.c mx_ls_sort_default.c mx_ls_sort_flag_r.c \
+			mx_ls_sort.c mx_ls_sort_default.c mx_ls_sort_flag_r.c \
 			mx_ls_sort_flag_big_s.c mx_ls_sort_flag_c.c mx_ls_sort_flag_t.c \
 			mx_ls_sort_flag_u.c mx_until_get_size_arr.c mx_until_create_char_arr.c \
 			mx_until_print_format_str.c mx_until_get_len_number.c \
-			mx_untill_get_max_nlink.c mx_untill_get_max_size.c 
+			mx_untill_get_max_nlink.c mx_untill_get_max_size.c mx_ls_check_flag.c
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

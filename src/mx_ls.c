@@ -1,16 +1,16 @@
 #include "uls.h"
 
-void mx_ls(char  **str_arr, char *flags) {
-    int str_size = mx_until_get_size_arr(str_arr);
+void mx_ls(t_main *main) {
+    int str_size = mx_until_get_size_arr(main->files);
     t_ls **files = mx_ls_create_struct_arr(str_size);
     char **files_without_dir = mx_until_create_char_arr(str_size);
     int k = 0;
 
     if (!str_size)
-        mx_ls_loop(mx_read_dir(".", mx_ls_get_hidden(flags)), flags);
+        mx_ls_loop(mx_read_dir(".", mx_ls_get_hidden(main->flags)), main->flags);
     
     for (int i = 0; i < str_size; i++)
-        files[i] = mx_get_lstat(str_arr[i]);
+        files[i] = mx_get_lstat(main->files[i]);
     files[str_size] = NULL;
     for (int i = 0; files[i]; i++) {
         files_without_dir[k] = mx_strdup(files[i]->name);
@@ -19,14 +19,14 @@ void mx_ls(char  **str_arr, char *flags) {
         else
             mx_strdel(&files_without_dir[k]);
     }
-    mx_ls_loop(files_without_dir, flags);
+    mx_ls_loop(files_without_dir, main->flags);
     // for (int i = 0; files[i]; i++)
     //     if (files[i]->type == 'd') {
     //         mx_printstr(files[i]->print_name);
     //         mx_printstr(":\n");
     //         mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags);
         // }
-    if(mx_get_char_index(flags, '1') >= 0) {
+    if(mx_ls_check_flag(main->flags, '1')) {
         mx_printstr("\n");
     }
 }
