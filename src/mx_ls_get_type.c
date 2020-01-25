@@ -4,6 +4,8 @@ char mx_ls_get_type(unsigned short int file_mode) {
 
     if ((file_mode & S_IFMT) == S_IFBLK)
         return 'b';
+    else if (((file_mode & S_IFMT) == S_IFREG) && (file_mode & S_IXUSR) == S_IXUSR)
+        return 'x';
     else if ((file_mode & S_IFMT) == S_IFCHR)
         return 'c';
     else if ((file_mode & S_IFMT) == S_IFIFO)
@@ -14,6 +16,5 @@ char mx_ls_get_type(unsigned short int file_mode) {
         return 'd';
     else if ((file_mode & S_IFMT) == S_IFLNK)
         return 'l';
-    else
-        return '-';
+    return '-';
 }
