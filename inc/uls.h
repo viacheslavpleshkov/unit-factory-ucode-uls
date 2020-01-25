@@ -42,20 +42,20 @@ typedef struct s_ls t_ls;
 typedef struct s_main t_main;
 
 typedef struct s_ls {
-    char *name;              //полное имя файла, например ./src/main.c
-    char *print_name;        //имя которое будет выведено на конслоль, например main.c
-    char *acl_inf;           //нужно для флага l (дополнительная информация)
-    char type;               //тип файла - - файл, d - директория, l - ссылка и т.д
+    char *name;              //full file name, example ./src/main.c
+    char *print_name;        //short file name, example main.c
+    char *acl_inf;           //needed for flag l (additional information)
+    char type;               //file type
     unsigned short int mode; //нужно для флага l, из него мы получаем права доступа и тип файла
-    long long int size;      //размер в байтах
-    unsigned int nlink;      //количество ссылок на файл, нужно для флага l
-    char *uid_name;          //имя пользователя
-    char *gid_name;          //имя группы
-    int blksize;             //количество занимаемых блоков(в байтах)
-    long long int blocks;    //количество занимаемых блоков (в блоках)
-    long int atime;          //время последнего доступа
-    long int mtime;          //время последнего изменения
-    long int ctime;          //время последнего изменения прав доступа
+    long long int size;      //size in bytes
+    unsigned int nlink;      //number of file links needed for flag l
+    char *uid_name;          //user name
+    char *gid_name;          //group name
+    int blksize;             //number of occupied blocks (in bytes)
+    long long int blocks;    //number of occupied blocks (in blocks)
+    long int atime;          //last access time
+    long int mtime;          //last change time
+    long int ctime;          //last change of access rights
 };
 
 typedef struct s_main {
