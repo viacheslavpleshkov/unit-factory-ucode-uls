@@ -1,9 +1,9 @@
 <p align="center">
     <a href="https://unit.ua/en/" target="_blank">
-        <img src="https://github.com/slava-pleshkov/unit-factory-ucode/blob/master/.git_images/unit_logo.png?raw=true" height="100px">
+        <img src="https://github.com/viacheslavpleshkov/unit-factory-ucode/blob/master/.git_images/unit_logo.png?raw=true" height="100px">
     </a>
     <a href="https://apply.ucode.world/" target="_blank">
-        <img src="https://github.com/slava-pleshkov/unit-factory-ucode/blob/master/.git_images/ucode_logo.png?raw=true" height="100px">
+        <img src="https://github.com/viacheslavpleshkov/unit-factory-ucode/blob/master/.git_images/ucode_logo.png?raw=true" height="100px">
     </a>
     <h1 align="center">unit-factory-ucode-uls</h1>
     <br>
@@ -22,8 +22,8 @@ C, Makefile, File system, Memory, Terminal, Bash, Unix, CBL framework
 1. Uninstalliation this command `make uninstall`
 
 ## Author
-1. Slava Pleshkov
-1. Leonid Dobrovolskyi
+1. <a href="https://github.com/viacheslavpleshko" target="_blank">Viacheslav Pleshkov</a>
+1. <a href="https://github.com/leodobrovolsky" target="_blank">Leonid Dobrovolskyi</a>
 
 
 ## License
