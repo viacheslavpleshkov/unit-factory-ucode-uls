@@ -1,6 +1,6 @@
 #include "uls.h"
-void print_color(char type, char *name, bool status) {
-    if (status == true) {
+void print_color(char type, char *name, bool color) {
+    if (color == true) {
         if (type == 'd') {
             mx_printstr(LS_COLOR_BLUE);
             mx_printstr(name);
@@ -12,10 +12,12 @@ void print_color(char type, char *name, bool status) {
         } else {
              mx_printstr(name);
         }    
-    }
+    } else
+        mx_printstr(name);
+    
 }
 
-void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
+void mx_ls_print_l(t_ls **files, int file_n, char *opt, bool color) {
     int max_nlink_len = mx_untill_get_max_nlink(files);
     int max_size_len = mx_untill_get_max_size(files);
     char *time_str = NULL;
@@ -45,7 +47,7 @@ void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
         mx_printstr(" ");
         mx_printstr(time_str);
         mx_printstr(" ");
-        print_color(files[i]->type, files[i]->print_name, true);
+        print_color(files[i]->type, files[i]->print_name, color);
         mx_printstr("\n");
     }
     opt = NULL;

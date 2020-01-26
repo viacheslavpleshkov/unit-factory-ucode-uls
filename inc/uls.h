@@ -38,15 +38,12 @@ typedef enum e_error {
 } t_error;
 
 //Struct
-typedef struct s_ls t_ls;
-typedef struct s_main t_main;
-
 typedef struct s_ls {
     char *name;              //full file name, example ./src/main.c
     char *print_name;        //short file name, example main.c
     char *acl_inf;           //needed for flag l (additional information)
     char type;               //file type
-    unsigned short int mode; //нужно для флага l, из него мы получаем права доступа и тип файла
+    unsigned short int mode; //needed for flag l, from it we get permissions and file type
     long long int size;      //size in bytes
     unsigned int nlink;      //number of file links needed for flag l
     char *uid_name;          //user name
@@ -56,20 +53,20 @@ typedef struct s_ls {
     long int atime;          //last access time
     long int mtime;          //last change time
     long int ctime;          //last change of access rights
-};
+} t_ls;
 
 typedef struct s_main {
     char **files;
     char *flags;
     bool color;
-};
+} t_main;
 
 //Official function
 int main(int argc, char **argv);
-void mx_ls(t_main *main);                            //начало программы
-void mx_ls_loop(char **files_name, char *flags);                    //главный цикл                                   //эта функция мне нужна для тестов, потом ее нужно будет удалить
-int mx_files_in_dir(char *dir, int headen);                         //возвращает к-ство файлов в директории
-char *mx_ls_get_rwx_str(unsigned short int file_mode);              //нужно для флага l
+void mx_ls(t_main *main);
+void mx_ls_loop(char **files_name, char *flags, t_main *main);
+int mx_files_in_dir(char *dir, int headen);
+char *mx_ls_get_rwx_str(unsigned short int file_mode);
 t_ls **mx_ls_create_struct_arr(int files_number);
 int mx_ls_get_hidden(char *flags);
 //Ls validation
@@ -86,10 +83,10 @@ char *mx_ls_get_print_name(const char *file);                       //получ
 int mx_get_terminal_width();                                        //получение ширины терминала
 char mx_ls_get_type(unsigned short int file_mode);                  //получение типа файла(файл, директория, ссылка и т.д)
 //Print function
-void mx_ls_print(t_ls **files, int file_n, char *flags);            //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
+void mx_ls_print(t_ls **files, int file_n, char *flags, bool color); //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
 void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal);
 void mx_ls_print_big_t(t_ls **files, int file_n, char *opt);
-void mx_ls_print_l(t_ls **files, int file_n, char *opt);
+void mx_ls_print_l(t_ls **files, int file_n, char *opt, bool color);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags);
 void mx_ls_sort_default(t_ls **arr);
