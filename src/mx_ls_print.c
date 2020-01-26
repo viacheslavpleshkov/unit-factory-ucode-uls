@@ -11,7 +11,7 @@ static int get_max_len(char **files) {
 }
 
 
-void mx_ls_print(t_ls **files, int file_n, char *flags) {
+void mx_ls_print(t_ls **files, int file_n, char *flags, bool color) {
     char **files_name = mx_until_create_char_arr(file_n + 1); //массив для хранения имен файлов
     
     for (int i = 0; i < file_n; i++)
@@ -19,7 +19,7 @@ void mx_ls_print(t_ls **files, int file_n, char *flags) {
     if ((mx_ls_check_flag(flags, 'l')) && (mx_ls_check_flag(flags, 'T')))
         mx_ls_print_big_t(files, file_n, flags);
     else if(mx_ls_check_flag(flags, 'l'))
-        mx_ls_print_l(files, file_n, flags);
+        mx_ls_print_l(files, file_n, flags, color);
     else if (mx_ls_check_flag(flags, '1')) {
         for (int i = 0; files_name[i] != NULL; i++) {
             if (i != 0)

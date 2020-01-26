@@ -7,7 +7,7 @@ static bool check_symbol(char *print_name) {
         return true;
 }
 
-void mx_ls_loop(char **files_name, char *flags) {
+void mx_ls_loop(char **files_name, char *flags, t_main *main) {
     int file_n = mx_until_get_size_arr(files_name);
     t_ls **files = mx_ls_create_struct_arr(file_n); //массив структур файлов
 
@@ -16,7 +16,7 @@ void mx_ls_loop(char **files_name, char *flags) {
 
     //здесь нужно вставить функцию сортировки
     mx_ls_sort(files, flags);
-    mx_ls_print(files, file_n, flags); //печать файлов
+    mx_ls_print(files, file_n, flags, main->color); //печать файлов
     
 
     for (int i = 0; files[i]; i++)
@@ -26,6 +26,6 @@ void mx_ls_loop(char **files_name, char *flags) {
             mx_printstr("\n");
             mx_printstr(files[i]->name); //печатает имя директории
             mx_printstr(":\n");
-            mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags); // печатает содержимое директории
+            mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags, main); // печатает содержимое директории
         }
 }
