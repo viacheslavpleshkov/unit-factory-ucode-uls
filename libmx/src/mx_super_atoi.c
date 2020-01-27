@@ -16,7 +16,7 @@ int mx_super_atoi(const char *str) {
         num *= 10;
         num += *str - '0';
         str++;
-    }  
+    }
     if (*str)
         return 0;
     return num * sign;

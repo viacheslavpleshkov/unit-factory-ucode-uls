@@ -7,7 +7,7 @@ char *mx_strtrim_char(const char *str, char c) {
     if (!str)
         return NULL;
     e = mx_strlen(str) - 1;
-    while(str[b] && str[b] == c) 
+    while(str[b] && str[b] == c)
         b++;
     while (str[e] && str[e] == c)
         e--;

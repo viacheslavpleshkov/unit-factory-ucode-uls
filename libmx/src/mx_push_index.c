@@ -12,7 +12,7 @@ void mx_push_index(t_list **list, void *data, int index) {
     if (index >= mx_list_size(*list)) {
         mx_push_back(list, data);
         return;
-    } 
+    }
     new = mx_create_node(data);
     present = last -> next;
     for (int i = 1; i < index; i++) {

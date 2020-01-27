@@ -9,5 +9,5 @@ char *mx_strcat(char *restrict s1, const char *restrict s2) {
         s2++;
     }
     s1[len_s1 + len_s2] = '\0';
-    return s1;    
+    return s1;
 }

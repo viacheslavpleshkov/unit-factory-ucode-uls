@@ -11,7 +11,7 @@ int mx_count_words(const char *str, char delimiter) {
     if (str[i]) words++;
     while (str[i]) {
         if (str[i] == delimiter) indifier++;
-        else 
+        else
             if (indifier > 0) {
                 indifier = 0;
                 words++;

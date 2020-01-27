@@ -10,7 +10,7 @@ int mx_get_substr_index(const char *str, const char *sub) {
     len_str = mx_strlen(str);
     len_sub = mx_strlen(sub);
 
-    for (int i = 0; i <= len_str - len_sub; i++) 
+    for (int i = 0; i <= len_str - len_sub; i++)
         if (!mx_strncmp(&str[i], sub, len_sub))
             return i;
 

@@ -9,7 +9,7 @@ void mx_push_back(t_list **list, void *data){
         return;
     }
 
-    while (temp -> next != NULL) 
+    while (temp -> next != NULL)
         temp = temp -> next;
     temp -> next = back;
 }
