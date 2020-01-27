@@ -9,7 +9,7 @@ char *mx_strtrim(const char *str) {
 
     e = mx_strlen(str) - 1;
 
-    while(str[b] && mx_isspace(str[b])) 
+    while(str[b] && mx_isspace(str[b]))
         b++;
 
     while (str[e] && mx_isspace(str[e]))

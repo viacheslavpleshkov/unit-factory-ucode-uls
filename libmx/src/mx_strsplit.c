@@ -9,11 +9,11 @@ char **mx_strsplit(const char *s, char c) {
 
     if (tmp)
         for (int k = 0; k < size; k++) {
-            while (tmp[i] && tmp[i] == c) 
+            while (tmp[i] && tmp[i] == c)
                 i++;
-            begin = i;  
-            while (tmp[i] && tmp[i] != c) 
-                i++;   
+            begin = i;
+            while (tmp[i] && tmp[i] != c)
+                i++;
             result[k] = mx_strndup(&tmp[begin], i - begin);
         }
     result[size] = NULL;

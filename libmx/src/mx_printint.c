@@ -9,8 +9,8 @@ void mx_printint(int n) {
         mx_printchar('0');
         return;
     }
-    for (int i = n; i != 0; i /= 10, len++) 
-        if (i != n) 
+    for (int i = n; i != 0; i /= 10, len++)
+        if (i != n)
             del *= 10;
     if (n < 0) {
         sign = -1;

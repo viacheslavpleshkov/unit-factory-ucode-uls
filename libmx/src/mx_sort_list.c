@@ -25,5 +25,5 @@ t_list *mx_sort_list(t_list *list, bool (*cmp)(void *, void *)) {
             mx_swap_str(get_data(list, i), get_data(list, min_elem));
     }
 
-    return list;  
+    return list;
 }

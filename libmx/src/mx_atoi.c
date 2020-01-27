@@ -5,7 +5,7 @@ int mx_atoi(const char *str) {
     int sign = 1;
     int num = 0;
 
-    while (mx_isspace(*str)) 
+    while (mx_isspace(*str))
         str++;
     if (*str == '+' || *str == '-') {
         if (*str == '-')
