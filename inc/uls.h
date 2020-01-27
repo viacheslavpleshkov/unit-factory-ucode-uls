@@ -32,10 +32,10 @@
 #define LS_COLOR_BOLD_CYAN  "\x1b[96;1m"
 #define LS_COLOR_RESET      "\x1b[0m"
 
-//Error
-typedef enum e_error {
-    INVLD_CMD_ARGS,
-} t_error;
+#define LS_NAME             "uls"
+#define LS_VALIDATION_STR   "*-aA*+lh@eT*--rtucS"
+#define LS_VALIDATION_FLAG  "&func_name: illegal option -- &inv_flag\nusage: &func_name [-&valid_flags] [file ...]"
+#define LS_CURRENT_FLAGS    "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1" 
 
 //Struct
 typedef struct s_ls {
@@ -58,19 +58,26 @@ typedef struct s_ls {
 typedef struct s_main {
     char **files;
     char *flags;
+    t_ls **files_struct;
+    t_ls **files_struct_two;
     bool color;
+    int str_size;
+    int file_n;
+    int terminal_width;
 } t_main;
 
 //Official function
 int main(int argc, char **argv);
 void mx_ls(t_main *main);
-void mx_ls_loop(char **files_name, char *flags, t_main *main);
+void mx_ls_loop(char **files_name, t_main *main);
 int mx_files_in_dir(char *dir, int headen);
 char *mx_ls_get_rwx_str(unsigned short int file_mode);
 t_ls **mx_ls_create_struct_arr(int files_number);
 int mx_ls_get_hidden(char *flags);
 //Ls validation
 bool mx_ls_check_flag(const char *flags, char flag);
+void mx_valid_flags(char *str, char *func_name, char *flags, char *valid_flags);
+char *mx_clear_flags(char *flags, char *valid_str);
 //Ls parse 
 char **mx_read_dir(char *dir, int headen);                          //возвращает все файлы в этой директории
 char *mx_ls_get_uid_name(int st_uid);                               //получение имени пользователя
@@ -83,10 +90,12 @@ char *mx_ls_get_print_name(const char *file);                       //получ
 int mx_get_terminal_width();                                        //получение ширины терминала
 char mx_ls_get_type(unsigned short int file_mode);                  //получение типа файла(файл, директория, ссылка и т.д)
 //Print function
-void mx_ls_print(t_ls **files, int file_n, char *flags, bool color); //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
-void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal);
-void mx_ls_print_big_t(t_ls **files, int file_n, char *opt);
-void mx_ls_print_l(t_ls **files, int file_n, char *opt, bool color);
+void mx_ls_print_colors(char type, char *name, bool color);
+void mx_ls_print(t_main *main);
+void mx_ls_print_big_c(t_main *main);
+void mx_ls_print_big_t(t_main *main);
+void mx_ls_print_l(t_main *main);
+void mx_ls_print_1(t_ls **files, bool color, int file_n);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags);
 void mx_ls_sort_default(t_ls **arr);
