@@ -1,5 +1,5 @@
-#ifndef libmx_h
-#define libmx_h
+#ifndef LIBMX_H
+#define LIBMX_H
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -7,8 +7,8 @@
 #include <fcntl.h>
 
 typedef struct s_list {
-void *data;
-struct s_list *next;
+    void *data;
+    struct s_list *next;
 } t_list;
 
 int mx_atoi(const char *str);
@@ -17,10 +17,10 @@ int mx_bubble_sort(char **arr, int size);
 int mx_count_substr(const char *str, const char *sub);
 int mx_count_words(const char *str, char delimiter);
 int mx_count_words_space(const char *str);
-char **mx_create_char_arr(int number);
-t_list  *mx_create_node(void *data);
+t_list *mx_create_node(void *data);
 char *mx_del_extra_spaces(const char *str);
 void mx_del_strarr(char ***arr);
+char *mx_file_to_str(const char *file);
 void mx_foreach(int *arr, int size, void (*f)(int));
 int mx_get_char_index(const char *str, char c);
 int mx_get_substr_index(const char *str, const char *sub);
@@ -45,7 +45,6 @@ void mx_pop_front(t_list **head);
 void mx_pop_index(t_list **list, int index);
 double mx_pow(double n, unsigned int pow);
 void mx_print_error(const char *str, int exit_code);
-void mx_print_format_str(char *str, char location, char symbol, int size);
 void mx_print_strarr(char **arr, const char *delim);
 void mx_printchar(char c);
 void mx_printint(int n);
@@ -78,5 +77,5 @@ void mx_swap_char(char *s1, char *s2);
 void mx_swap_str(char **s1, char **s2);
 int mx_tolower(int c);
 int mx_toupper(int c);
-#endif
 
+#endif

@@ -32,10 +32,10 @@
 #define LS_COLOR_BOLD_CYAN  "\x1b[96;1m"
 #define LS_COLOR_RESET      "\x1b[0m"
 
-#define LS_NAME             "uls"
-#define LS_VALIDATION_STR   "*-aA*+lh@eT*--rtucS"
-#define LS_VALIDATION_FLAG  "&func_name: illegal option -- &inv_flag\nusage: &func_name [-&valid_flags] [file ...]"
-#define LS_CURRENT_FLAGS    "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1" 
+#define LS_VALID_STR "&func_name: illegal option -- &inv_flag\nusage: &func_name [-&valid_flags] [file ...]"
+#define LS_VALID_FLAGS "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1"
+#define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS"
+#define LS_FUNC_NAME "mx_ls"
 
 //Struct
 typedef struct s_ls {
@@ -43,7 +43,7 @@ typedef struct s_ls {
     char *print_name;        //short file name, example main.c
     char *acl_inf;           //needed for flag l (additional information)
     char type;               //file type
-    unsigned short int mode; //needed for flag l, from it we get permissions and file type
+    unsigned short int mode; //нужно для флага l, из него мы получаем права доступа и тип файла
     long long int size;      //size in bytes
     unsigned int nlink;      //number of file links needed for flag l
     char *uid_name;          //user name
@@ -57,21 +57,20 @@ typedef struct s_ls {
 
 typedef struct s_main {
     char **files;
-    char *flags;
     t_ls **files_struct;
-    t_ls **files_struct_two;
+    char *flags;
     bool color;
     int str_size;
-    int file_n;
-    int terminal_width;
 } t_main;
 
 //Official function
 int main(int argc, char **argv);
-void mx_ls(t_main *main);
-void mx_ls_loop(char **files_name, t_main *main);
-int mx_files_in_dir(char *dir, int headen);
-char *mx_ls_get_rwx_str(unsigned short int file_mode);
+t_ls **mx_insort_lstat(char **main_files, t_ls **files, int str_size);
+t_main *mx_create_main(int argc, char **argv);
+void mx_ls(t_main *main);                            //начало программы
+void mx_ls_loop(char **files_name, char *flags);                    //главный цикл                                   //эта функция мне нужна для тестов, потом ее нужно будет удалить
+int mx_files_in_dir(char *dir, int headen);                         //возвращает к-ство файлов в директории
+char *mx_ls_get_rwx_str(unsigned short int file_mode);              //нужно для флага l
 t_ls **mx_ls_create_struct_arr(int files_number);
 int mx_ls_get_hidden(char *flags);
 //Ls validation
@@ -90,12 +89,10 @@ char *mx_ls_get_print_name(const char *file);                       //получ
 int mx_get_terminal_width();                                        //получение ширины терминала
 char mx_ls_get_type(unsigned short int file_mode);                  //получение типа файла(файл, директория, ссылка и т.д)
 //Print function
-void mx_ls_print_colors(char type, char *name, bool color);
-void mx_ls_print(t_main *main);
-void mx_ls_print_big_c(t_main *main);
-void mx_ls_print_big_t(t_main *main);
-void mx_ls_print_l(t_main *main);
-void mx_ls_print_1(t_ls **files, bool color, int file_n);
+void mx_ls_print(t_ls **files, int file_n, char *flags);            //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
+void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal);
+void mx_ls_print_big_t(t_ls **files, int file_n, char *opt);
+void mx_ls_print_l(t_ls **files, int file_n, char *opt);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags);
 void mx_ls_sort_default(t_ls **arr);
@@ -105,6 +102,7 @@ void mx_ls_sort_flag_c(t_ls **arr);
 void mx_ls_sort_flag_t(t_ls **arr);                             
 void mx_ls_sort_flag_u(t_ls **arr);
 //Until function
+void mx_untill_del_tls(t_ls ***arr);
 int mx_until_get_size_arr(char **str_arr);
 char **mx_until_create_char_arr(int number);
 void mx_until_print_format_str(char *str, char location, char symbol, int size);
