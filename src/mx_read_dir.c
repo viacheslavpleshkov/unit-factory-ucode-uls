@@ -22,8 +22,11 @@ char **mx_read_dir(char *dir, int headen) {
     temp = readdir(folder);
     result = (char**)malloc(sizeof(char*) * (files + 1));
     for (int i = 0; i < files; i++) {
-        if (get_result(temp->d_name, headen, &i))
-            result[i] = mx_strjoin(mx_strjoin(dir, "/"), temp->d_name);
+        if (get_result(temp->d_name, headen, &i)) {
+            char *mem = mx_strjoin(dir, "/");
+            result[i] = mx_strjoin(mem, temp->d_name);
+            mx_strdel(&mem);
+        }
         temp = readdir(folder);
     }
     result[files] = NULL;

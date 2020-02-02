@@ -2,10 +2,12 @@
 
 char *mx_ls_get_uid_name(int st_uid) {
     struct passwd *pwd;
+    char *srr = mx_itoa(st_uid);
 
     pwd = getpwuid(st_uid);
-    if (pwd)
+    if (pwd){
+        mx_strdel(&srr);
         return pwd->pw_name;
-    else
-        return mx_itoa(st_uid);
+    } else
+        return srr;
 }
