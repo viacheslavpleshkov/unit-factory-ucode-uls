@@ -37,8 +37,10 @@ void static print_files_without_dir(t_ls **files, char *flags, int str_size) {
 void static print_dir(t_ls **files, char *flags) {
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd') {
-            mx_printstr(files[i]->print_name);
-            mx_printstr(":\n");
+            if (!(i == 0 && files[i + 1] == NULL)) {
+                mx_printstr(files[i]->print_name);
+                mx_printstr(":\n");
+            }
             mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags);
         }
     }
