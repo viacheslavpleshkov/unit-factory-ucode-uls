@@ -41,6 +41,8 @@ void static print_dir(t_ls **files, char *flags) {
                 mx_printstr(files[i]->print_name);
                 mx_printstr(":\n");
             }
+            if (files[i + 1] != NULL)
+                mx_printchar('\n');
             mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags);
         }
     }
