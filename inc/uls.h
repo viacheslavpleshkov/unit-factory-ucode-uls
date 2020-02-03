@@ -32,7 +32,7 @@
 #define LS_COLOR_BOLD_CYAN  "\x1b[96;1m"
 #define LS_COLOR_RESET      "\x1b[0m"
 
-#define LS_VALID_STR "&func_name: illegal option -- &inv_flag\nusage: &func_name [-&valid_flags] [file ...]"
+#define LS_VALID_STR "&func_name: illegal option -- &invalflag \nusage: &func_name  [-&val_flags] [file ...]"
 #define LS_VALID_FLAGS "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1"
 #define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS"
 #define LS_FUNC_NAME "mx_ls"
