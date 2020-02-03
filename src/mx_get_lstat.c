@@ -10,13 +10,47 @@ static struct stat get_stat(const char *file, int mode) {
     return buf;
 }
 
+static char *pop_char(char *str, int index) {
+    int len = 0;
+    char *result = NULL;
+
+    if (str) {
+        len = mx_strlen(str);
+        result = mx_strnew(len - 1);
+        for (int i = 0; i < len; i++) {
+            if (i < index)
+                result[i] = str[i];
+            else
+                result[i] = str[i + 1];
+        }
+    }
+    return result;
+}
+
+static char *check_file(const char *file) {
+    char *result = mx_strdup(file);
+    char *tmp = NULL;
+
+    if (file) {
+        for (int i = 0; i < result[i]; i++)
+            if (result[i] == '/' && result[i + 1] == '/') { 
+                tmp = mx_strdup(result);
+                mx_strdel(&result);
+                result = pop_char(tmp, i + 1);
+                mx_strdel(&tmp);
+                i--;
+            }
+    }   
+    return result;
+}
+
 t_ls *mx_get_lstat(const char *file) {
     struct stat lbuf = get_stat(file, GET_LSTAT);
     t_ls *new_struct = malloc(sizeof(t_ls));
     char* gid_name = mx_ls_get_gid_name(lbuf.st_gid);
     char* uid_name = mx_ls_get_uid_name(lbuf.st_uid);
 
-    new_struct->name = (char *)file;
+    new_struct->name = check_file(file);
     new_struct->print_name = mx_ls_get_print_name(file);
     new_struct->acl_inf = mx_ls_get_acl_inf(file);
     new_struct->type = mx_ls_get_type(lbuf.st_mode);
