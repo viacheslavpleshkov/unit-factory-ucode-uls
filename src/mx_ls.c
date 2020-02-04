@@ -1,40 +1,40 @@
 #include "uls.h"
 
-void static print_dir(t_ls **files, char *flags);
-void static print_files_without_dir(t_ls **files, char *flags, int str_size);
+void static print_dir(t_ls **files, t_main *main);
+void static print_files_without_dir(t_main *main);
 
 void mx_ls(t_main *main) {
     if (!main->str_size) {
         char **memory = mx_read_dir(".", mx_ls_get_hidden(main->flags));
-        mx_ls_loop(memory, main->flags);
+        mx_ls_loop(memory, main);
         mx_del_strarr(&memory);
     }
     main->files_struct = mx_insort_lstat(main->files, main->files_struct, main->str_size);
-    print_files_without_dir(main->files_struct, main->flags, main->str_size);
+    print_files_without_dir(main);
     if (mx_ls_check_flag(main->flags, '1'))
         mx_printstr("\n");
     mx_untill_del_tls(&main->files_struct);
 }
 
-void static print_files_without_dir(t_ls **files, char *flags, int str_size) {
-    char **files_without_dir = mx_until_create_char_arr(str_size);
+void static print_files_without_dir(t_main *main) {
+    char **files_without_dir = mx_until_create_char_arr(main->str_size);
     int k = 0;
 
-    for (int i = 0; files[i]; i++) {
-        files_without_dir[k] = mx_strdup(files[i]->name);
-        if (files[i]->type != 'd')
+    for (int i = 0; main->files_struct[i]; i++) {
+        files_without_dir[k] = mx_strdup(main->files_struct[i]->name);
+        if (main->files_struct[i]->type != 'd')
             k++;
         else
             mx_strdel(&files_without_dir[k]);
     }
 
-    mx_ls_loop(files_without_dir, flags);
-    print_dir(files, flags);
+    mx_ls_loop(files_without_dir, main);
+    print_dir(main->files_struct, main);
     mx_del_strarr(&files_without_dir);
 
 }
 
-void static print_dir(t_ls **files, char *flags) {
+void static print_dir(t_ls **files, t_main *main) {
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd') {
             if (!(i == 0 && files[i + 1] == NULL)) {
@@ -43,7 +43,7 @@ void static print_dir(t_ls **files, char *flags) {
             }
             if (files[i + 1] != NULL)
                 mx_printchar('\n');
-            mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(flags)), flags);
+            mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags)), main);
         }
     }
 }

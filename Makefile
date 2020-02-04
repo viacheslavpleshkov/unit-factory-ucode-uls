@@ -27,7 +27,7 @@ SRC		= 	main.c mx_ls.c mx_ls_loop.c mx_files_in_dir.c \
 			mx_until_print_format_str.c mx_until_get_len_number.c \
 			mx_untill_get_max_nlink.c mx_untill_get_max_size.c mx_ls_check_flag.c \
 			mx_create_main.c mx_untill_del_tls.c mx_valid_flags.c mx_clear_flags.c \
-			mx_insort_lstat.c
+			mx_insort_lstat.c mx_ls_print_1.c print_color.c 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
@@ -38,9 +38,11 @@ install: $(LMXA) $(NAME)
 
 $(NAME): $(OBJS)
 	@$(COMP) $(CFLG) $(OBJS) -L$(LMXD) -lmx -o $@
+	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(OBJD)/%.o: $(SRCD)/%.c $(INCS)
 	@$(COMP) $(CFLG) -c $< -o $@ -I$(INCD) -I$(LMXI)
+	@printf "\r\33[2K$(NAME) \033[33;1mcompile \033[0m$(<:$(SRCD)/%.c=%) "	
 
 $(OBJS): | $(OBJD)
 
@@ -52,9 +54,11 @@ $(LMXA):
 clean:
 	@make -sC $(LMXD) $@
 	@rm -rf $(OBJD)
+	@printf "$(OBJD)\t   \033[31;1mdeleted\033[0m\n"
 
 uninstall: clean
 	@make -sC $(LMXD) $@
 	@rm -rf $(NAME)
+	@printf "$(NAME) \033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall install

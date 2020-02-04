@@ -64,6 +64,5 @@ t_ls *mx_get_lstat(const char *file) {
     new_struct->atime = lbuf.st_atime;
     new_struct->mtime = lbuf.st_mtime;
     new_struct->ctime = lbuf.st_ctime;
-    // mx_strdel(&gid_name);
     return new_struct;
 }
