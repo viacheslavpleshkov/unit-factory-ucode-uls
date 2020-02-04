@@ -1,60 +1,67 @@
 #include "uls.h"
-void print_color(char type, char *name, bool status) {
-    if (status == true) {
-        if (type == 'd') {
-            mx_printstr(LS_COLOR_BLUE);
-            mx_printstr(name);
-            mx_printstr(LS_COLOR_RESET);
-        } else if (type == 'x') {
-            mx_printstr(LS_COLOR_RED);
-            mx_printstr(name);
-            mx_printstr(LS_COLOR_RESET);
-        } else {
-             mx_printstr(name);
-        }    
+
+static void print_total(t_ls **files, int file_n);
+static void print_rwx(t_ls *files);
+static void print_size(t_ls *files, int max_size_len);
+static void print_link(t_ls *files, int max_nlink_len);
+
+void mx_ls_print_l(t_ls **files, t_main *main) {
+    char *time_str = NULL;
+    char *temp = NULL;
+
+    print_total(files, main->file_n);
+    for (int i = 0; i < main->file_n; i++) {
+        temp = ctime(&files[i]->mtime);
+        time_str = mx_strndup(&temp[4], 12);
+        mx_printchar(files[i]->type);
+        print_rwx(files[i]);
+        print_link(files[i], mx_untill_get_max_nlink(files));
+        mx_printstr(files[i]->uid_name);
+        mx_printstr("  ");
+        mx_printstr(files[i]->gid_name);
+        print_size(files[i], mx_untill_get_max_size(files));
+        mx_printstr(time_str);
+        mx_printstr(" ");
+        print_color(files[i]->type, files[i]->print_name, main->color);
+        mx_printstr("\n");
+        mx_strdel(&time_str); 
     }
 }
 
-void mx_ls_print_l(t_ls **files, int file_n, char *opt) {
-    int max_nlink_len = mx_untill_get_max_nlink(files);
-    int max_size_len = mx_untill_get_max_size(files);
-    char *time_str = NULL;
-    char *temp = NULL;
-    long int total = 0;
- 
+static void print_total(t_ls **files, int file_n) {
+    long long int total = 0;
+    char *printtotal = NULL;
+
     if (*files != NULL) {
         mx_printstr("total ");
         for (int i = 0; i < file_n; i++)
             total += files[i]->blocks;
-        mx_printstr(mx_itoa(total));
+        printtotal = mx_itoa(total);
+        mx_printstr(printtotal);
+        mx_strdel(&printtotal);
         mx_printchar('\n');
     }
-    for (int i = 0; i < file_n; i++) {
-        temp = ctime(&files[i]->mtime);
-        time_str = mx_strndup(&temp[4], 12);
-        mx_printchar(files[i]->type);
-        char *rwx_str = mx_ls_get_rwx_str(files[i]->mode);
-        mx_printstr(rwx_str);
-        mx_strdel(&rwx_str);
-        mx_printstr(" ");
-        mx_printstr(" ");
-        char *link= mx_itoa((int)files[i]->nlink);
-        mx_until_print_format_str(link, 'r', ' ', max_nlink_len);
-        mx_strdel(&link);
-        mx_printstr(" ");
-        mx_printstr(files[i]->uid_name);
-        mx_printstr("  ");
-        mx_printstr(files[i]->gid_name);
-        mx_printstr("  ");
-        char *size = mx_itoa((int)files[i]->size);
-        mx_until_print_format_str(size, 'r', ' ', max_size_len);
-        mx_strdel(&size);
-        mx_printstr(" ");
-        mx_printstr(time_str);
-        mx_printstr(" ");
-        print_color(files[i]->type, files[i]->print_name, true);
-        mx_printstr("\n");
-        mx_strdel(&time_str); 
-    }
-    opt = NULL;
+}
+
+static void print_rwx(t_ls *files) {
+    char *rwx_str = mx_ls_get_rwx_str(files->mode);
+    mx_printstr(rwx_str);
+    mx_strdel(&rwx_str);
+}
+
+static void print_size(t_ls *files, int max_size_len) {
+    char *size = mx_itoa((int)files->size);
+    mx_printstr("  ");
+    mx_until_print_format_str(size, 'r', ' ', max_size_len);
+    mx_printstr(" ");
+    mx_strdel(&size);
+}
+
+static void print_link(t_ls *files, int max_nlink_len) {
+    char *link= mx_itoa((int)files->nlink);
+    mx_printstr(" ");
+    mx_printstr(" ");
+    mx_until_print_format_str(link, 'r', ' ', max_nlink_len);
+    mx_printstr(" ");
+    mx_strdel(&link);
 }

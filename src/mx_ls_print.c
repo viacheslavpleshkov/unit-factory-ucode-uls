@@ -10,23 +10,21 @@ static int get_max_len(char **files) {
     return max_len;
 }
 
+void mx_ls_print(t_ls **files, t_main *main) {
+    char **files_name = mx_until_create_char_arr(main->file_n + 1); //массив для хранения имен файлов
+    char *flags = main->flags;
+    int file_n = main->file_n;
 
-void mx_ls_print(t_ls **files, int file_n, char *flags) {
-    char **files_name = mx_until_create_char_arr(file_n + 1); //массив для хранения имен файлов
-    
     for (int i = 0; i < file_n; i++){
         files_name[i] = mx_strdup(files[i]->print_name);
     }
+    
     if ((mx_ls_check_flag(flags, 'l')) && (mx_ls_check_flag(flags, 'T')))
-        mx_ls_print_big_t(files, file_n, flags);
+        mx_ls_print_big_t(files, main);
     else if(mx_ls_check_flag(flags, 'l'))
-        mx_ls_print_l(files, file_n, flags);
+        mx_ls_print_l(files, main);
     else if (mx_ls_check_flag(flags, '1')) {
-        for (int i = 0; files_name[i] != NULL; i++) {
-            if (i != 0)
-                mx_printstr("\n");
-            mx_printstr(files_name[i]);
-        }
+        mx_ls_print_1(files, main);
     } else
         mx_ls_print_big_c(files_name, file_n, get_max_len(files_name), mx_get_terminal_width());
     mx_del_strarr(&files_name);

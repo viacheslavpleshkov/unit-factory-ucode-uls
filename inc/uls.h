@@ -61,6 +61,7 @@ typedef struct s_main {
     char *flags;
     bool color;
     int str_size;
+    int file_n;
 } t_main;
 
 //Official function
@@ -68,7 +69,7 @@ int main(int argc, char **argv);
 t_ls **mx_insort_lstat(char **main_files, t_ls **files, int str_size);
 t_main *mx_create_main(int argc, char **argv);
 void mx_ls(t_main *main);                            //начало программы
-void mx_ls_loop(char **files_name, char *flags);                    //главный цикл                                   //эта функция мне нужна для тестов, потом ее нужно будет удалить
+void mx_ls_loop(char **files_name, t_main *main);                   //главный цикл                                   //эта функция мне нужна для тестов, потом ее нужно будет удалить
 int mx_files_in_dir(char *dir, int headen);                         //возвращает к-ство файлов в директории
 char *mx_ls_get_rwx_str(unsigned short int file_mode);              //нужно для флага l
 t_ls **mx_ls_create_struct_arr(int files_number);
@@ -89,10 +90,12 @@ char *mx_ls_get_print_name(const char *file);                       //получ
 int mx_get_terminal_width();                                        //получение ширины терминала
 char mx_ls_get_type(unsigned short int file_mode);                  //получение типа файла(файл, директория, ссылка и т.д)
 //Print function
-void mx_ls_print(t_ls **files, int file_n, char *flags);            //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
+void mx_ls_print(t_ls **files, t_main *main);        //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
 void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal);
-void mx_ls_print_big_t(t_ls **files, int file_n, char *opt);
-void mx_ls_print_l(t_ls **files, int file_n, char *opt);
+void mx_ls_print_big_t(t_ls **files, t_main *main);
+void mx_ls_print_l(t_ls **files, t_main *main);
+void mx_ls_print_1(t_ls **files, t_main *main);
+void print_color(char type, char *name, bool status);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags);
 void mx_ls_sort_default(t_ls **arr);
