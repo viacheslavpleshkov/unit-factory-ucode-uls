@@ -20,5 +20,6 @@ t_main *mx_create_main(int argc, char **argv){
     main->flags = flags;
     main->color = mx_check_color(flags);
     main->str_size = str_size;
+    main->terminal_width = mx_get_terminal_width();
     return main;
 }

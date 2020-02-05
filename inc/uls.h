@@ -43,6 +43,7 @@ typedef struct s_ls {
     char *print_name;        //short file name, example main.c
     char *acl_inf;           //needed for flag l (additional information)
     char type;               //file type
+    char color;              //file color
     unsigned short int mode; //нужно для флага l, из него мы получаем права доступа и тип файла
     long long int size;      //size in bytes
     unsigned int nlink;      //number of file links needed for flag l
@@ -62,6 +63,7 @@ typedef struct s_main {
     bool color;
     int str_size;
     int file_n;
+    int terminal_width;
 } t_main;
 
 //Official function
@@ -89,13 +91,15 @@ t_ls *mx_get_lstat(const char *file);                               //получ
 char *mx_ls_get_print_name(const char *file);                       //получение имени для вывода на консоль
 int mx_get_terminal_width();                                        //получение ширины терминала
 char mx_ls_get_type(unsigned short int file_mode);                  //получение типа файла(файл, директория, ссылка и т.д)
+char mx_ls_get_color(struct stat buf);
 //Print function
 void mx_ls_print(t_ls **files, t_main *main);        //функция, которая получает файлы для печати и передает их нужной функции в зависимости от флагов
-void mx_ls_print_big_c(char **files, int file_n, int max_len, int len_terminal);
+void mx_ls_print_big_c(t_ls **files, t_main *main);
 void mx_ls_print_big_t(t_ls **files, t_main *main);
 void mx_ls_print_l(t_ls **files, t_main *main);
 void mx_ls_print_1(t_ls **files, t_main *main);
-void print_color(char type, char *name, bool status);
+void mx_ls_print_link_name(const char *file);
+void mx_ls_print_color(char type, char *name, bool status);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags);
 void mx_ls_sort_default(t_ls **arr);

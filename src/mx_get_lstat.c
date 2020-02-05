@@ -54,6 +54,7 @@ t_ls *mx_get_lstat(const char *file) {
     new_struct->print_name = mx_ls_get_print_name(file);
     new_struct->acl_inf = mx_ls_get_acl_inf(file);
     new_struct->type = mx_ls_get_type(lbuf.st_mode);
+    new_struct->color = mx_ls_get_color(lbuf);
     new_struct->mode = lbuf.st_mode;
     new_struct->size = lbuf.st_size;
     new_struct->nlink = lbuf.st_nlink;
