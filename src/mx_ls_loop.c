@@ -10,7 +10,7 @@ static bool check_symbol(char *print_name) {
 void mx_ls_loop(char **files_name, t_main *main) {
     main->file_n = mx_until_get_size_arr(files_name);
     t_ls **files = mx_ls_create_struct_arr(main->file_n); //массив структур файлов
-    
+
     for (int i = 0; files_name[i]; i++){
         free(files[i]);
         files[i] = mx_get_lstat(files_name[i]);

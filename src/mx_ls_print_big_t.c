@@ -22,7 +22,7 @@ void mx_ls_print_big_t(t_ls **files, t_main *main) {
         print_size(files[i], mx_untill_get_max_size(files));
         mx_printstr(time_str);
         mx_printstr(" ");
-        print_color(files[i]->type, files[i]->print_name, main->color);
+        mx_ls_print_color(files[i]->color, files[i]->print_name, main->color);
         mx_printstr("\n");
         mx_strdel(&time_str); 
     }

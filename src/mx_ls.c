@@ -4,8 +4,10 @@ void static print_dir(t_ls **files, t_main *main);
 void static print_files_without_dir(t_main *main);
 
 void mx_ls(t_main *main) {
+    char **memory = NULL;
+
     if (!main->str_size) {
-        char **memory = mx_read_dir(".", mx_ls_get_hidden(main->flags));
+        memory = mx_read_dir(".", mx_ls_get_hidden(main->flags));
         mx_ls_loop(memory, main);
         mx_del_strarr(&memory);
     }
@@ -35,6 +37,8 @@ void static print_files_without_dir(t_main *main) {
 }
 
 void static print_dir(t_ls **files, t_main *main) {
+    char **memory = NULL;
+
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd') {
             if (!(i == 0 && files[i + 1] == NULL)) {
@@ -43,7 +47,9 @@ void static print_dir(t_ls **files, t_main *main) {
             }
             if (files[i + 1] != NULL)
                 mx_printchar('\n');
-            mx_ls_loop(mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags)), main);
+            memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
+            mx_ls_loop(memory, main);
+            mx_del_strarr(&memory);
         }
     }
 }
