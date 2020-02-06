@@ -23,19 +23,14 @@
 #define LS_HIDDEN_a 1
 #define LS_HIDDEN_A 2
 
-#define LS_COLOR_RED        "\x1b[31m"
-#define LS_COLOR_GREEN      "\x1b[32m"
-#define LS_COLOR_BOLD_GREEN "\x1b[32;1m"
-#define LS_COLOR_YELLOW     "\x1b[33m"
-#define LS_COLOR_BLUE       "\x1b[34m"
-#define LS_COLOR_MAGENTA    "\x1b[35m"
-#define LS_COLOR_BOLD_CYAN  "\x1b[96;1m"
-#define LS_COLOR_RESET      "\x1b[0m"
-
 #define LS_VALID_STR "&func_name: illegal option -- &invalflag \nusage: &func_name  [-&val_flags] [file ...]"
 #define LS_VALID_FLAGS "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1"
 #define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS"
 #define LS_FUNC_NAME "mx_ls"
+
+typedef enum e_error {
+    ERR_EACCES,
+} t_error;
 
 //Struct
 typedef struct s_ls {
@@ -77,6 +72,7 @@ char *mx_ls_get_rwx_str(unsigned short int file_mode);              //нужно
 t_ls **mx_ls_create_struct_arr(int files_number);
 int mx_ls_get_hidden(char *flags);
 //Ls validation
+void mx_ls_error(t_error err, char *s);
 bool mx_ls_check_flag(const char *flags, char flag);
 void mx_valid_flags(char *str, char *func_name, char *flags, char *valid_flags);
 char *mx_clear_flags(char *flags, char *valid_str);
@@ -97,7 +93,7 @@ void mx_ls_print(t_ls **files, t_main *main);        //функция, кото�
 void mx_ls_print_big_c(t_ls **files, t_main *main);
 void mx_ls_print_big_t(t_ls **files, t_main *main);
 void mx_ls_print_l(t_ls **files, t_main *main);
-void mx_ls_print_1(t_ls **files, t_main *main);
+void mx_ls_print_one(t_ls **files, t_main *main);
 void mx_ls_print_link_name(const char *file);
 void mx_ls_print_color(char type, char *name, bool status);
 //Sort function

@@ -48,6 +48,10 @@ void static print_dir(t_ls **files, t_main *main) {
             if (files[i + 1] != NULL)
                 mx_printchar('\n');
             memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
+            if (!memory) {
+                mx_ls_error(ERR_EACCES, files[i]->print_name);
+                continue;
+            }
             mx_ls_loop(memory, main);
             mx_del_strarr(&memory);
         }

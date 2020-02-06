@@ -17,6 +17,8 @@ char **mx_read_dir(char *dir, int headen) {
     int files = mx_files_in_dir(dir, headen);
     char **result = NULL;
 
+    if (!folder) 
+        return NULL;
     if (files < 0)
         return NULL;
     temp = readdir(folder);
