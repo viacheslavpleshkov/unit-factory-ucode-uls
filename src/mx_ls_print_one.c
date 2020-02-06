@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_ls_print_1(t_ls **files, t_main *main) {
+void mx_ls_print_one(t_ls **files, t_main *main) {
     for (int i = 0; i != main->file_n; i++) {
         if (i != 0)
             mx_printstr("\n");
