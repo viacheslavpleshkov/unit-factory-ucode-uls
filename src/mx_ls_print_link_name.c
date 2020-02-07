@@ -7,8 +7,9 @@ void mx_ls_print_link_name(const char *file) {
     ssize_t buf_size = 0;
     lstat(file, &sb);
     buf_size = sb.st_size + 1;
-    buf = malloc(buf_size);
+    buf = mx_strnew(buf_size);
     nbytes = readlink(file, buf, buf_size);
+    mx_printstr(" -> ");
     if (nbytes >= 0)
         mx_printstr(buf);
     mx_strdel(&buf);
