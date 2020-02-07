@@ -10,5 +10,8 @@ void mx_ls_print(t_ls **files, t_main *main) {
     else if (mx_ls_check_flag(flags, '1')) {
         mx_ls_print_one(files, main);
     } else
-        mx_ls_print_big_c(files, main);
+        if (main->out_in_terminal == false)
+            mx_ls_print_one(files, main);
+        else 
+            mx_ls_print_big_c(files, main);
 }

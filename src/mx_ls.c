@@ -13,8 +13,6 @@ void mx_ls(t_main *main) {
     }
     main->files_struct = mx_insort_lstat(main->files, main->files_struct, main->str_size);
     print_files_without_dir(main);
-    if (mx_ls_check_flag(main->flags, '1'))
-        mx_printstr("\n");
     mx_untill_del_tls(&main->files_struct);
 }
 
