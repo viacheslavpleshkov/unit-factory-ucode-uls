@@ -59,6 +59,7 @@ typedef struct s_main {
     int str_size;
     int file_n;
     int terminal_width;
+    bool out_in_terminal;
 } t_main;
 
 //Official function

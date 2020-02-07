@@ -23,6 +23,9 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
         mx_printstr(time_str);
         mx_printstr(" ");
         mx_ls_print_color(files[i]->color, files[i]->print_name, main->color);
+        if (files[i]->type == 'l')
+            mx_ls_print_link_name(files[i]->print_name);
+        
         mx_printstr("\n");
         mx_strdel(&time_str); 
     }

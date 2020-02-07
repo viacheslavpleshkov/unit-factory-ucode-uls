@@ -48,6 +48,10 @@ void mx_ls_print_color(char type, char *name, bool status) {
             mx_printstr("\33[0;34m");
             mx_printstr(name);
             mx_printstr("\33[0m");
-        } 
-    }
+        } else
+            mx_printstr(name);
+        
+    } else
+        mx_printstr(name);
+    
 }

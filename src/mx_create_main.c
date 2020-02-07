@@ -6,6 +6,14 @@ static bool mx_check_color(char *flags){
     return false;
 }
 
+static bool check_isatty() {
+	bool result = true;
+
+    if (isatty(1) == 0)
+    	result = false;
+    return result;
+}
+
 t_main *mx_create_main(int argc, char **argv){
     t_main *main = malloc(sizeof(t_main));
     char *temp = mx_create_flags_str(argv, argc);
@@ -21,5 +29,6 @@ t_main *mx_create_main(int argc, char **argv){
     main->color = mx_check_color(flags);
     main->str_size = str_size;
     main->terminal_width = mx_get_terminal_width();
+    main->out_in_terminal = check_isatty();
     return main;
 }
