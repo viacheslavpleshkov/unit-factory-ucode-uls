@@ -27,13 +27,14 @@ static char *pop_char(char *str, int index) {
     return result;
 }
 
-static char *check_file(const char *file) {
+static char *check_file(const char *file, unsigned short int file_mode) {
     char *result = mx_strdup(file);
     char *tmp = NULL;
+    char type = mx_ls_get_type(file_mode);
 
     if (file) {
         for (int i = 0; i < result[i]; i++)
-            if (result[i] == '/' && result[i + 1] == '/') { 
+            if (result[i] == '/' && result[i + 1] == '/' && type != 'd') { 
                 tmp = mx_strdup(result);
                 mx_strdel(&result);
                 result = pop_char(tmp, i + 1);
@@ -50,7 +51,7 @@ t_ls *mx_get_lstat(const char *file) {
     char* gid_name = mx_ls_get_gid_name(lbuf.st_gid);
     char* uid_name = mx_ls_get_uid_name(lbuf.st_uid);
 
-    new_struct->name = check_file(file);
+    new_struct->name = check_file(file, lbuf.st_mode);
     new_struct->print_name = mx_ls_get_print_name(file);
     new_struct->acl_inf = mx_ls_get_acl_inf(file);
     new_struct->type = mx_ls_get_type(lbuf.st_mode);
