@@ -30,7 +30,7 @@ void mx_until_print_format_l(t_ls *file, t_main *main, int size) {
         case 'r': print_symbol(' ', size - len); break;
     }
 
-    mx_ls_print_color(file->color, file->print_name, main->color);
+    mx_ls_print_color(file, main->color);
 
     switch (name) {
         case 'c': print_symbol(' ', size - len - (size - len) / 2); break;

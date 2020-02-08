@@ -9,7 +9,6 @@ char *mx_ls_get_acl_inf(const char *file) {
         str = acl_to_text(acl_file, NULL);
         acl_free(acl_file);
         return str;
-    }
-    else
+    } else
     	return NULL;
 }

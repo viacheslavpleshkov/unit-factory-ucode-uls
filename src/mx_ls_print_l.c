@@ -8,11 +8,12 @@ static void print_link(t_ls *files, int max_nlink_len);
 void mx_ls_print_l(t_ls **files, t_main *main) {
     char *time_str = NULL;
     char *temp = NULL;
+    bool st = mx_ls_check_flag(main->flags, 'T');
 
     print_total(files, main->file_n);
     for (int i = 0; i < main->file_n; i++) {
         temp = ctime(&files[i]->mtime);
-        time_str = mx_strndup(&temp[4], 12);
+        time_str = (st) ? mx_strndup(&temp[4], 20) : mx_strndup(&temp[4], 12);
         mx_printchar(files[i]->type);
         print_rwx(files[i]);
         print_link(files[i], mx_untill_get_max_nlink(files));
@@ -22,7 +23,7 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
         print_size(files[i], mx_untill_get_max_size(files));
         mx_printstr(time_str);
         mx_printstr(" ");
-        mx_ls_print_color(files[i]->color, files[i]->print_name, main->color);
+        mx_ls_print_color(files[i], main->color);
         if (files[i]->type == 'l')
             mx_ls_print_link_name(files[i]->name);
         mx_printstr("\n");

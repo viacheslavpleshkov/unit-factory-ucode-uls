@@ -1,5 +1,18 @@
 #include "uls.h"
 
+static char dir_check(struct stat buf);
+static char second_mode_unit(struct stat buf);
+static char file_check(struct stat buf);
+static char one_mode_unit(struct stat buf);
+
+char mx_ls_get_color(struct stat buf) {
+    char c;
+    c = one_mode_unit(buf);
+    if (c == '-')
+        c = second_mode_unit(buf);
+    return c;
+}
+
 static char dir_check(struct stat buf) {
     char c = '-';
 
@@ -62,13 +75,5 @@ static char one_mode_unit(struct stat buf) {
     }
     if (c == '-')
         c = file_check(buf);
-    return c;
-}
-
-char mx_ls_get_color(struct stat buf) {
-    char c;
-    c = one_mode_unit(buf);
-    if (c == '-')
-        c = second_mode_unit(buf);
     return c;
 }

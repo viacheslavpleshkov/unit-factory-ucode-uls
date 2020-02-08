@@ -11,7 +11,7 @@ void mx_ls(t_main *main) {
         mx_ls_loop(memory, main);
         mx_del_strarr(&memory);
     }
-    main->files_struct = mx_insort_lstat(main->files, main->files_struct, main->str_size);
+    main->files_struct = mx_insort_lstat(main->files, main);
     print_files_without_dir(main);
     mx_untill_del_tls(&main->files_struct);
 }

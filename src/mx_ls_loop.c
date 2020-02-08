@@ -5,7 +5,7 @@ static void recursive(t_ls **files, t_main *main);
 
 void mx_ls_loop(char **files_name, t_main *main) {
     main->file_n = mx_until_get_size_arr(files_name);
-    t_ls **files = mx_ls_create_struct_arr(main->file_n); //массив структур файлов
+    t_ls **files = mx_ls_create_struct_arr(main->file_n);
 
     for (int i = 0; files_name[i]; i++){
         free(files[i]);
@@ -23,11 +23,12 @@ static void recursive(t_ls **files, t_main *main) {
     ino_t dev_fd = mx_get_ino_dev_fd();
 
     for (int i = 0; files[i]; i++) {
-        if (files[i]->type == 'd' && mx_ls_check_flag(main->flags, 'R')) {//если файл - директория и есть флаг R
-            if (mx_ls_check_flag(main->flags, 'a') && !check_symbol(files[i]->print_name)) //проверка на . ..
+        if (files[i]->type == 'd' && mx_ls_check_flag(main->flags, 'R')) {
+            if (mx_ls_check_flag(main->flags, 'a') 
+                && !check_symbol(files[i]->print_name))
                 continue;
             mx_printstr("\n");
-            mx_printstr(files[i]->name); //печатает имя директории
+            mx_printstr(files[i]->name);
             mx_printstr(":\n");
             if (files[i]->ino == dev_fd)
                 continue;
@@ -36,7 +37,7 @@ static void recursive(t_ls **files, t_main *main) {
                 mx_ls_error(ERR_EACCES, files[i]->print_name);
                 continue;
             }
-            mx_ls_loop(memory, main); // печатает содержимое директории
+            mx_ls_loop(memory, main);
             mx_del_strarr(&memory);
         }
     }
