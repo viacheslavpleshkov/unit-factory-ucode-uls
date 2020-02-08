@@ -3,6 +3,6 @@
 int main(int argc, char **argv) {
     t_main *main = mx_create_main(argc, argv);
     mx_ls(main);
-    return 0;
+    system("leaks -q uls");
 }
 
