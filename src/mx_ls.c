@@ -34,24 +34,27 @@ void static print_files_without_dir(t_main *main) {
 
 }
 
+void static print_dir_name(char *file_name) {
+    mx_printstr(file_name);
+    mx_printstr(":\n");
+}
+
 void static print_dir(t_ls **files, t_main *main) {
-    char **memory = NULL;
+    char **mem = NULL;
 
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd') {
-            if (!(i == 0 && files[i + 1] == NULL)) {
-                mx_printstr(files[i]->print_name);
-                mx_printstr(":\n");
-            }
-            if (files[i + 1] != NULL)
-                mx_printchar('\n');
-            memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
-            if (!memory) {
+            if (!(i == 0 && files[i + 1] == NULL))
+                print_dir_name(files[i]->name);
+            mem = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
+            if (!mem) {
                 mx_ls_error(ERR_EACCES, files[i]->print_name);
                 continue;
             }
-            mx_ls_loop(memory, main);
-            mx_del_strarr(&memory);
+            mx_ls_loop(mem, main);
+            if (files[i + 1] != NULL)
+                mx_printchar('\n');
+            mx_del_strarr(&mem);
         }
     }
 }
