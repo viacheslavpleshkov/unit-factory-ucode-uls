@@ -20,9 +20,9 @@ void mx_ls_print_big_c(t_ls **files, t_main *main) {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             if (main->file_n - 1 == j * rows + i)
-                mx_ls_print_color(files[i]->color, files[j * rows + i]->print_name, main->color);
+                mx_ls_print_color(files[j * rows + i]->color, files[j * rows + i]->print_name, main->color);
             if (main->file_n - 1> j * rows + i)
-                mx_until_print_format_str(files[j * rows + i]->print_name, 'l', ' ', row);
+                mx_until_print_format_l(files[j * rows + i], main, row);
         }
         mx_printchar('\n');
     }

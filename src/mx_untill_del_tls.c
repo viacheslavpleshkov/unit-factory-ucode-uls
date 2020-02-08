@@ -10,7 +10,7 @@ void mx_untill_del_tls(t_ls ***arr) {
 
     while ((*arr)[i]) {
         free((*arr)[i]->gid_name);
-         free((*arr)[i]->uid_name);
+        free((*arr)[i]->uid_name);
         free((*arr)[i]->name);
         mx_strdel_tls(&(*arr)[i]);
         i++;
