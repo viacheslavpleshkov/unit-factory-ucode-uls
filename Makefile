@@ -28,7 +28,7 @@ SRC		= 	main.c mx_ls.c mx_ls_loop.c mx_files_in_dir.c \
 			mx_untill_get_max_nlink.c mx_untill_get_max_size.c mx_ls_check_flag.c \
 			mx_create_main.c mx_untill_del_tls.c mx_valid_flags.c mx_clear_flags.c \
 			mx_insort_lstat.c mx_ls_print_one.c mx_ls_print_color.c mx_ls_print_link_name.c \
-			mx_ls_get_color.c mx_ls_error.c 
+			mx_ls_get_color.c mx_ls_error.c mx_get_ino_dev_fd.c
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

@@ -41,9 +41,12 @@ void static print_dir_name(char *file_name) {
 
 void static print_dir(t_ls **files, t_main *main) {
     char **mem = NULL;
+    ino_t dev_fd = mx_get_ino_dev_fd();
 
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd') {
+            if (files[i]->ino == dev_fd)
+                continue;
             if (!(i == 0 && files[i + 1] == NULL))
                 print_dir_name(files[i]->name);
             mem = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));

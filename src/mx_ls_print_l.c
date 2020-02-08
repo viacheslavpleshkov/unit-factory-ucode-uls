@@ -24,8 +24,7 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
         mx_printstr(" ");
         mx_ls_print_color(files[i]->color, files[i]->print_name, main->color);
         if (files[i]->type == 'l')
-            mx_ls_print_link_name(files[i]->print_name);
-        
+            mx_ls_print_link_name(files[i]->name);
         mx_printstr("\n");
         mx_strdel(&time_str); 
     }
@@ -55,7 +54,7 @@ static void print_rwx(t_ls *files) {
 static void print_size(t_ls *files, int max_size_len) {
     char *size = mx_itoa((int)files->size);
     mx_printstr("  ");
-    mx_until_print_format_str(size, 'r', ' ', max_size_len);
+    mx_until_print_format_str(size, max_size_len);
     mx_printstr(" ");
     mx_strdel(&size);
 }
@@ -64,7 +63,7 @@ static void print_link(t_ls *files, int max_nlink_len) {
     char *link= mx_itoa((int)files->nlink);
     mx_printstr(" ");
     mx_printstr(" ");
-    mx_until_print_format_str(link, 'r', ' ', max_nlink_len);
+    mx_until_print_format_str(link, max_nlink_len);
     mx_printstr(" ");
     mx_strdel(&link);
 }

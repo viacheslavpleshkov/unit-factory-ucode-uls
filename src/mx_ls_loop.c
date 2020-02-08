@@ -20,6 +20,7 @@ void mx_ls_loop(char **files_name, t_main *main) {
 
 static void recursive(t_ls **files, t_main *main) {
     char **memory = NULL;
+    ino_t dev_fd = mx_get_ino_dev_fd();
 
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd' && mx_ls_check_flag(main->flags, 'R')) {//если файл - директория и есть флаг R
@@ -28,6 +29,8 @@ static void recursive(t_ls **files, t_main *main) {
             mx_printstr("\n");
             mx_printstr(files[i]->name); //печатает имя директории
             mx_printstr(":\n");
+            if (files[i]->ino == dev_fd)
+                continue;
             memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
             if (!memory) {
                 mx_ls_error(ERR_EACCES, files[i]->print_name);
