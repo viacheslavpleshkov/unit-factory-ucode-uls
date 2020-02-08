@@ -2,7 +2,8 @@
 
 static bool mx_check_color(char *flags){
     if (mx_ls_check_flag(flags, 'G'))
-        return true;
+        if (isatty(1) != 0)
+            return true;
     return false;
 }
 
@@ -13,9 +14,7 @@ static bool check_isatty() {
     	result = false;
     return result;
 }
-static bool color_term(bool status, bool terminal) {
 
-}
 t_main *mx_create_main(int argc, char **argv){
     t_main *main = malloc(sizeof(t_main));
     char *temp = mx_create_flags_str(argv, argc);
@@ -25,7 +24,6 @@ t_main *mx_create_main(int argc, char **argv){
     mx_valid_flags(LS_VALID_STR, LS_FUNC_NAME, temp, LS_VALID_FLAGS);
     char *flags = mx_clear_flags(temp, LS_CLEAR_STR); 
     mx_strdel(&temp);   
-    bool color = color_term(mx_check_color(flags), check_isatty());
     main->files = files;
     main->files_struct = mx_ls_create_struct_arr(str_size);
     main->flags = flags;
