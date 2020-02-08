@@ -15,6 +15,7 @@ int mx_atoi(const char *str);
 int mx_binary_search(char **arr, int size, const char *s, int *count);
 int mx_bubble_sort(char **arr, int size);
 int mx_count_substr(const char *str, const char *sub);
+int mx_count_char(char *str, char c);
 int mx_count_words(const char *str, char delimiter);
 int mx_count_words_space(const char *str);
 t_list *mx_create_node(void *data);

@@ -1,14 +1,23 @@
 #include "uls.h"
 
-static int count_char(char *str, char c) {
-    int count = 0;
+static char *pop_char(char *str, char c);
+static void swap_value(char **tmp, char **result, char v_char);
+static char *del_without_last(char *v_str, char *flags);
+static char *del_char(char *flags, char *v_str);
 
-    if (str && c) {
-        for (int i = 0; str[i]; i++)
-            if (str[i] == c)
-                count++;
+char *mx_clear_flags(char *flags, char *valid_str) {
+    char **v_arr = mx_strsplit(valid_str, '*');
+    char *result = mx_strdup(flags);
+    char *tmp = NULL;
+
+    for (int i = 0; v_arr[i]; i++) {
+        tmp = mx_strdup(result);
+        mx_strdel(&result);
+        result = del_char(tmp, v_arr[i]);
+        mx_strdel(&tmp);
     }
-    return count;
+    mx_del_strarr(&v_arr);
+    return result;
 }
 
 static char *pop_char(char *str, char c) {
@@ -16,7 +25,7 @@ static char *pop_char(char *str, char c) {
     int k = 0;
 
     if (str) {
-        result = mx_strnew(mx_strlen(str) - count_char(str, c));
+        result = mx_strnew(mx_strlen(str) - mx_count_char(str, c));
         for (int i = 0; str[i]; i++) {
             if (str[i] != c) {
                 result[k] = str[i];
@@ -73,20 +82,5 @@ static char *del_char(char *flags, char *v_str) {
         && mx_get_char_index(flags, v_str[1]) < 0)
             for (int i = 2; i < len; i++)
                 swap_value(&tmp, &result, v_str[i]);
-    return result;
-}
-
-char *mx_clear_flags(char *flags, char *valid_str) {
-    char **v_arr = mx_strsplit(valid_str, '*');
-    char *result = mx_strdup(flags);
-    char *tmp = NULL;
-
-    for (int i = 0; v_arr[i]; i++) {
-        tmp = mx_strdup(result);
-        mx_strdel(&result);
-        result = del_char(tmp, v_arr[i]);
-        mx_strdel(&tmp);
-    }
-    mx_del_strarr(&v_arr);
     return result;
 }
