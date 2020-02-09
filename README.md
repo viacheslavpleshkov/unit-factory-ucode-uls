@@ -16,17 +16,17 @@ C, Makefile, File system, Memory, Terminal, Bash, Unix, CBL framework
 
 <hr>
 
-### Building the program
+## Building the program
 
 1. Download/Clone the source code
 2. `cd` into the root directory
 3. Run `make`
 
-### Running the program
+## Running the program
 
 It's pretty simple, instead of calling `ls`, call `./uls` from the root directory of the source code after building it.
 
-#### Supported flags
+## Supported flags
 ```
 usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1 [file ...]
 ```
