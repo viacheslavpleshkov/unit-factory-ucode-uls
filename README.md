@@ -16,13 +16,38 @@ C, Makefile, File system, Memory, Terminal, Bash, Unix, CBL framework
 
 <hr>
 
-## How to use
-1. Compilation this command `make`
-1. Reinstalliation this command `make reinstall`
-1. Uninstalliation this command `make uninstall`
+### Building the program
+
+1. Download/Clone the source code
+2. `cd` into the root directory
+3. Run `make`
+
+### Running the program
+
+It's pretty simple, instead of calling `ls`, call `./uls` from the root directory of the source code after building it.
+
+#### Supported flags
+```
+usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1 [file ...]
+```
+- Long listing display: -l
+- Display recursively: -R
+- Display all files: -a
+- Reverse sort: -r
+- Sort by modification date: -t
+- Display user ID and group ID: -n
+- Suppress owner: -g
+- Display one entry per line: -1
+- Column display: -C (Set by default)
+- Sort by creation date: -U
+- Sort by last access date: -a
+- Sort by last status change date: -c
+- Show every entry except for current and previous directories: -A
+- Sort by file size: -S
+- Colorized output: -G (Only works in long listing display)
 
 ## Author
-1. <a href="https://github.com/viacheslavpleshko" target="_blank">Viacheslav Pleshkov</a>
+1. <a href="https://github.com/viacheslavpleshkov" target="_blank">Viacheslav Pleshkov</a>
 1. <a href="https://github.com/leodobrovolsky" target="_blank">Leonid Dobrovolskyi</a>
 
 
