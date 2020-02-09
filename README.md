@@ -28,7 +28,7 @@ It's pretty simple, instead of calling `ls`, call `./uls` from the root director
 
 ## Supported flags
 ```
-usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1 [file ...]
+usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]
 ```
 - Long listing display: -l
 - Display recursively: -R

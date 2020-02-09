@@ -1,6 +1,7 @@
 #include "uls.h"
 
 void static print_dir(t_ls **files, t_main *main);
+void static print_dir_name(char *file_name);
 void static print_files_without_dir(t_main *main);
 
 void mx_ls(t_main *main) {
@@ -27,7 +28,6 @@ void static print_files_without_dir(t_main *main) {
         else
             mx_strdel(&files_without_dir[k]);
     }
-
     mx_ls_loop(files_without_dir, main);
     print_dir(main->files_struct, main);
     mx_del_strarr(&files_without_dir);
