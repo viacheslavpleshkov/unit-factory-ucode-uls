@@ -2,6 +2,7 @@
 
 static bool check_symbol(char *print_name);
 static void recursive(t_ls **files, t_main *main);
+static void print_dir_name(char *dir_name);
 
 void mx_ls_loop(char **files_name, t_main *main) {
     main->file_n = mx_until_get_size_arr(files_name);
@@ -18,6 +19,15 @@ void mx_ls_loop(char **files_name, t_main *main) {
     mx_untill_del_tls(&files);
 }
 
+static void print_dir_name(char *dir_name) {
+    mx_printstr("\n");
+    if (dir_name && dir_name[0] == '/' && dir_name[1] == '/' 
+        && dir_name[2] != '/')
+            mx_printstr(&dir_name[1]);
+    mx_printstr(dir_name);
+    mx_printstr(":\n");
+}
+
 static void recursive(t_ls **files, t_main *main) {
     char **memory = NULL;
     ino_t dev_fd = mx_get_ino_dev_fd();
@@ -27,9 +37,7 @@ static void recursive(t_ls **files, t_main *main) {
             if (mx_ls_check_flag(main->flags, 'a') 
                 && !check_symbol(files[i]->print_name))
                 continue;
-            mx_printstr("\n");
-            mx_printstr(files[i]->name);
-            mx_printstr(":\n");
+            print_dir_name(files[i]->name);
             if (files[i]->ino == dev_fd)
                 continue;
             memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));

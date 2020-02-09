@@ -5,8 +5,11 @@ static int get_max_len(t_ls **files);
 void mx_ls_print_big_c(t_ls **files, t_main *main) {
     int row = LEN_TAB * (get_max_len(files) / LEN_TAB) + LEN_TAB;
     int cols = main->terminal_width / row;
-    int rows = main->file_n / cols;
+    int rows = 0;
 
+    if (!cols)
+        cols++;
+    rows = main->file_n / cols;
     if (main->file_n % cols != 0)
         rows++;
     for (int i = 0; i < rows; i++) {

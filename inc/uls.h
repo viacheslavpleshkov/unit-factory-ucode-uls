@@ -24,8 +24,8 @@
 #define LS_HIDDEN_A 2
 
 #define LS_VALID_STR "&func_name: illegal option -- &invalflag \nusage: &func_name  [-&val_flags]] [file ...]"
-#define LS_VALID_FLAGS "ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1"
-#define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS"
+#define LS_VALID_FLAGS "ACGRSTaclmrstu1"
+#define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS*--1Cml"
 #define LS_FUNC_NAME "uls"
 
 typedef enum e_error {
@@ -98,6 +98,7 @@ void mx_ls_print(t_ls **files, t_main *main);
 void mx_ls_print_big_c(t_ls **files, t_main *main);
 void mx_ls_print_l(t_ls **files, t_main *main);
 void mx_ls_print_one(t_ls **files, t_main *main);
+void mx_ls_print_m(t_ls **files, t_main *main);
 void mx_ls_print_link_name(const char *file);
 void mx_ls_print_color(t_ls *ls, bool status);
 //Sort function
