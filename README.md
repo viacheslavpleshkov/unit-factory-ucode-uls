@@ -38,13 +38,13 @@ usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]
 - Display user ID and group ID: -n
 - Suppress owner: -g
 - Display one entry per line: -1
-- Column display: -C (Set by default)
+- Column display: -C
 - Sort by creation date: -U
 - Sort by last access date: -a
 - Sort by last status change date: -c
 - Show every entry except for current and previous directories: -A
 - Sort by file size: -S
-- Colorized output: -G (Only works in long listing display)
+- Colorized output: -G 
 
 ## Author
 1. <a href="https://github.com/viacheslavpleshkov" target="_blank">Viacheslav Pleshkov</a>
