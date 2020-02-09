@@ -1,15 +1,6 @@
 #include "uls.h"
 
-static bool get_result(char *d_name, int headen, int *i) {
-    if (headen == LS_HIDDEN_NOT && d_name[0] == '.')
-        *i -= 1;
-    else if (headen == LS_HIDDEN_A && (!mx_strcmp(d_name, ".")
-        || !mx_strcmp(d_name, "..")))
-            *i -=1;
-    else
-        return true;
-    return false;
-}
+static bool get_result(char *d_name, int headen, int *i);
 
 char **mx_read_dir(char *dir, int headen) {
     DIR *folder = opendir(dir);
@@ -34,4 +25,15 @@ char **mx_read_dir(char *dir, int headen) {
     result[files] = NULL;
     closedir(folder);
     return result;
+}
+
+static bool get_result(char *d_name, int headen, int *i) {
+    if (headen == LS_HIDDEN_NOT && d_name[0] == '.')
+        *i -= 1;
+    else if (headen == LS_HIDDEN_A && (!mx_strcmp(d_name, ".")
+        || !mx_strcmp(d_name, "..")))
+            *i -=1;
+    else
+        return true;
+    return false;
 }
