@@ -72,6 +72,5 @@ static void print_color_tree(char type, char *name) {
         mx_printstr("\33[0;34m");
         mx_printstr(name);
         mx_printstr("\33[0m");
-    } else
-        mx_printstr(name);
+    }
 }
