@@ -28,15 +28,13 @@ It's pretty simple, instead of calling `ls`, call `./uls` from the root director
 
 ## Supported flags
 ```
-usage: uls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]
+usage: uls [-ACGRSTaclmrstu1] [file ...]
 ```
 - Long listing display: -l
 - Display recursively: -R
 - Display all files: -a
 - Reverse sort: -r
 - Sort by modification date: -t
-- Display user ID and group ID: -n
-- Suppress owner: -g
 - Display one entry per line: -1
 - Column display: -C
 - Sort by creation date: -U

@@ -42,6 +42,7 @@ SRC		= 	main.c \
 			mx_ls_print.c \
 			mx_ls_print_big_c.c \
 			mx_ls_print_l.c \
+			mx_ls_print_m.c \
 			mx_ls_print_one.c \
 			mx_ls_print_link_name.c \
 			mx_ls_print_color.c \
