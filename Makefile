@@ -59,7 +59,8 @@ SRC		= 	main.c \
 			mx_until_print_format_str.c \
 			mx_until_get_len_number.c \
 			mx_untill_get_max_nlink.c \
-			mx_untill_get_max_size.c 
+			mx_untill_get_max_size.c \
+			mx_validation_name.c 
 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))

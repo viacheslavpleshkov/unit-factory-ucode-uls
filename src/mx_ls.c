@@ -22,6 +22,7 @@ void static print_files_without_dir(t_main *main) {
     int k = 0;
 
     for (int i = 0; main->files_struct[i]; i++) {
+
         files_without_dir[k] = mx_strdup(main->files_struct[i]->name);
         if (main->files_struct[i]->type != 'd')
             k++;
