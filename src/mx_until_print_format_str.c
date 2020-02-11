@@ -2,19 +2,19 @@
 
 static void print_symbol(char symbol, int number);
 
-void mx_until_print_format_str(char *str, int size) {
+void mx_until_print_format_str(char *str, char local, char symbol, int size) {
     int len = mx_strlen(str);
-    char name = 'r';
-    switch (name) {
-        case 'c': print_symbol(' ', (size - len) / 2); break;
-        case 'r': print_symbol(' ', size - len); break;
+
+    switch (local) {
+        case 'c': print_symbol(symbol, (size - len) / 2); break;
+        case 'r': print_symbol(symbol, size - len); break;
     }
 
     mx_printstr(str);
 
-    switch (name) {
-        case 'c': print_symbol(' ', size - len - (size - len) / 2); break;
-        case 'l': print_symbol(' ', size - len); break;
+    switch (local) {
+        case 'c': print_symbol(symbol, size - len - (size - len) / 2); break;
+        case 'l': print_symbol(symbol, size - len); break;
     }
 }
 

@@ -6,11 +6,11 @@ static void print_color_tree(char type, char *name);
 
 void mx_ls_print_color(t_ls *ls, bool status) {
     if (status == true) {
-        print_color_one(ls->type, ls->print_name);
-        print_color_two(ls->type, ls->print_name);
-        print_color_tree(ls->type, ls->print_name);
+        print_color_one(ls->type, mx_validation_name(ls->print_name));
+        print_color_two(ls->type, mx_validation_name(ls->print_name));
+        print_color_tree(ls->type, mx_validation_name(ls->print_name));
     } else
-        mx_printstr(ls->print_name);
+        mx_printstr(mx_validation_name(ls->print_name));
 }
 
 static void print_color_one(char type, char *name) {
@@ -36,11 +36,7 @@ static void print_color_one(char type, char *name) {
 }
 
 static void print_color_two(char type, char *name) {
-    if (type == 'c') {
-        mx_printstr("\33[0;34;43m");
-        mx_printstr(name);
-        mx_printstr("\33[0m");
-    } else if (type == 'b') {
+    if (type == 'b') {
         mx_printstr("\33[0;34;46m");
         mx_printstr(name);
         mx_printstr("\33[0m");

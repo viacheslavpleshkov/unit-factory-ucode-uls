@@ -51,7 +51,8 @@ typedef struct s_ls {
     long int mtime;          //last change time
     long int ctime;          //last change of access rights
     ino_t ino;               //file serial number
-
+    int file_minor;
+    int file_major;
 } t_ls;
 
 typedef struct s_main {
@@ -81,6 +82,7 @@ void mx_ls_error(t_error err, char *s);
 bool mx_ls_check_flag(const char *flags, char flag);
 void mx_valid_flags(char *str, char *func_name, char *flags, char *valid_flags);
 char *mx_clear_flags(char *flags, char *valid_str);
+char *mx_validation_name(char *name);
 //Ls parse 
 char **mx_read_dir(char *dir, int headen);
 char *mx_ls_get_uid_name(int st_uid);
@@ -113,10 +115,9 @@ void mx_ls_sort_flag_u(t_ls **arr);
 void mx_untill_del_tls(t_ls ***arr);
 int mx_until_get_size_arr(char **str_arr);
 char **mx_until_create_char_arr(int number);
-void mx_until_print_format_str(char *str, int size);
+void mx_until_print_format_str(char *str, char location, char symbol, int size);
 void mx_until_print_format_l(t_ls *file, t_main *main, int size);
 int mx_until_get_len_number(unsigned long long int number);
 int mx_untill_get_max_nlink(t_ls **files);
 int mx_untill_get_max_size(t_ls **files);
-
 #endif
