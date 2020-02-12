@@ -5,12 +5,15 @@ static void print_color_two(char type, char *name);
 static void print_color_tree(char type, char *name);
 
 void mx_ls_print_color(t_ls *ls, bool status) {
+    char *name = mx_validation_name(ls->print_name);
+    
     if (status == true) {
-        print_color_one(ls->type, mx_validation_name(ls->print_name));
-        print_color_two(ls->type, mx_validation_name(ls->print_name));
-        print_color_tree(ls->type, mx_validation_name(ls->print_name));
+        print_color_one(ls->type, name);
+        print_color_two(ls->type, name);
+        print_color_tree(ls->type, name);
     } else
-        mx_printstr(mx_validation_name(ls->print_name));
+        mx_printstr(name);
+    mx_strdel(&name);
 }
 
 static void print_color_one(char type, char *name) {

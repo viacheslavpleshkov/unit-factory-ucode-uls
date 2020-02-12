@@ -1,7 +1,11 @@
 #include "uls.h"
 
 char *mx_validation_name(char *name) {
-    char *namerepleca = mx_replace_substr(name, "\r", "?");
-    namerepleca = mx_replace_substr(namerepleca, "\n", "?");
-    return namerepleca;
+    char *namerepleca = NULL;
+    char *namereplecatwo = NULL;
+
+    namerepleca = mx_replace_substr(name, "\r", "?");
+    namereplecatwo = mx_replace_substr(namerepleca, "\n", "?");
+    mx_strdel(&namerepleca);
+    return namereplecatwo;
 }
