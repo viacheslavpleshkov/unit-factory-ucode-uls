@@ -2,7 +2,9 @@
 
 int mx_get_terminal_width() {
     struct winsize term;
-
+    
     ioctl(0, TIOCGWINSZ, &term);
-    return term.ws_col;
+    if (isatty(1) != 0)
+        return term.ws_col;
+    return 79;
 }

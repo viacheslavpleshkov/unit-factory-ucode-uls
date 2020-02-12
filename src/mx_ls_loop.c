@@ -7,13 +7,11 @@ static void print_dir_name(char *dir_name);
 void mx_ls_loop(char **files_name, t_main *main) {
     main->file_n = mx_until_get_size_arr(files_name);
     t_ls **files = mx_ls_create_struct_arr(main->file_n);
-
     for (int i = 0; files_name[i]; i++){
         free(files[i]);
         files[i] = mx_get_lstat(files_name[i]);
     }
-    
-    mx_ls_sort(files, main->flags);
+    mx_ls_sort(files, main->flags, main->file_n);
     mx_ls_print(files, main);  
     recursive(files, main);
     mx_untill_del_tls(&files);

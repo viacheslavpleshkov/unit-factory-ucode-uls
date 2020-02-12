@@ -104,13 +104,13 @@ void mx_ls_print_m(t_ls **files, t_main *main);
 void mx_ls_print_link_name(const char *file);
 void mx_ls_print_color(t_ls *ls, bool status);
 //Sort function
-void mx_ls_sort(t_ls **files, char *flags);
-void mx_ls_sort_default(t_ls **arr);
-void mx_ls_sort_flag_r(t_ls **arr);
-void mx_ls_sort_flag_big_s(t_ls **arr);                        
-void mx_ls_sort_flag_c(t_ls **arr);                         
-void mx_ls_sort_flag_t(t_ls **arr);                             
-void mx_ls_sort_flag_u(t_ls **arr);
+void mx_ls_sort(t_ls **files, char *flags, int size);
+void mx_ls_sort_default(t_ls **arr, int size);
+void mx_ls_sort_flag_r(t_ls **arr, int size);
+void mx_ls_sort_flag_big_s(t_ls **arr, int size);                        
+void mx_ls_sort_flag_c(t_ls **arr, int size);                         
+void mx_ls_sort_flag_t(t_ls **arr, int size);                             
+void mx_ls_sort_flag_u(t_ls **arr, int size);
 //Until function
 void mx_untill_del_tls(t_ls ***arr);
 int mx_until_get_size_arr(char **str_arr);
