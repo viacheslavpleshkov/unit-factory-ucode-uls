@@ -11,6 +11,7 @@ void print_template(const char *str, char *func_name, char flag, char *valid_fla
         write(2, &flag, 1);
     else if (!mx_strcmp(tmp, "&val_flags"))
         write(2, valid_flags, mx_strlen(valid_flags));
+    mx_strdel(&tmp);
 }
 
 void mx_valid_flags(char *str, char *func_name, char *flags, char *valid_flags) {

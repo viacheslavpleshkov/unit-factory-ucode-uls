@@ -1,53 +1,5 @@
 #include "uls.h"
 
-static int max_uid_str(t_ls **files) {
-    int max_len = 0;
-    int len = 0;
-
-    for (int i = 0; files[i]; i++) {
-        len = mx_strlen(files[i]->uid_name);
-        if (len > max_len)
-            max_len = len;
-    }
-    return max_len;
-}
-
-static int max_gid_str(t_ls **files) {
-    int max_len = 0;
-    int len = 0;
-
-    for (int i = 0; files[i]; i++) {
-        len = mx_strlen(files[i]->gid_name);
-        if (len > max_len)
-            max_len = len;
-    }
-    return max_len;
-}
-
-static void print_major_minor(t_ls *files) {
-    char *major = mx_itoa((int)files->file_major);
-    char *minor = mx_itoa((int)files->file_minor);
-
-    
-    mx_until_print_format_str(major, 'r', ' ', 5);
-    mx_printstr(",");
-    mx_until_print_format_str(minor, 'r', ' ', 4);
-    mx_printstr(" ");
-    mx_strdel(&major);
-    mx_strdel(&minor);
-}
-
-static bool check_character_files(t_ls **files) {
-    bool result = false;
-
-    for (int i = 0; files[i]; i++)
-        if (files[i]->type == 'c' || files[i]->type == 'b') {
-            result = true;
-            break;
-        }
-    return result;
-}
-
 static void print_total(t_ls **files, int file_n) {
     long long int total = 0;
     char *printtotal = NULL;
@@ -90,9 +42,9 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
     char *time_str = NULL;
     char *temp = NULL;
     bool st = mx_ls_check_flag(main->flags, 'T');
-    int max_uid = max_uid_str(files);
-    int max_gid = max_gid_str(files);
-    bool chararter_files = check_character_files(files);
+    int max_uid = mx_max_uid_str(files);
+    int max_gid = mx_max_gid_str(files);
+    bool chararter_files = mx_check_character_files(files);
 
     print_total(files, main->file_n);
     for (int i = 0; i < main->file_n; i++) {
@@ -111,7 +63,7 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
                 print_size(files[i], 8 + mx_untill_get_max_size(files));
         }
         else 
-            print_major_minor(files[i]);
+            mx_ls_major_minor(files[i]);
         mx_printstr(time_str);
         mx_printstr(" ");
         mx_ls_print_color(files[i], main->color);

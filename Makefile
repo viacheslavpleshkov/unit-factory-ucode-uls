@@ -60,8 +60,9 @@ SRC		= 	main.c \
 			mx_until_get_len_number.c \
 			mx_untill_get_max_nlink.c \
 			mx_untill_get_max_size.c \
-			mx_validation_name.c 
-
+			mx_validation_name.c \
+			mx_ls_print_l_more.c \
+			mx_ls_major_minor.c
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
