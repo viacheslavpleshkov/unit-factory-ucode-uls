@@ -1,7 +1,10 @@
 
 #include "uls.h"
 
-static void mx_strdel_tls(t_ls **str);
+static void mx_strdel_tls(t_ls **str) {
+    free(*str);
+    *str = NULL;
+}
 
 void mx_untill_del_tls(t_ls ***arr) {
     int i = 0;
@@ -15,9 +18,4 @@ void mx_untill_del_tls(t_ls ***arr) {
     }
     free(*arr);
     *arr = NULL;
-}
-
-static void mx_strdel_tls(t_ls **str) {
-    free(*str);
-    *str = NULL;
 }

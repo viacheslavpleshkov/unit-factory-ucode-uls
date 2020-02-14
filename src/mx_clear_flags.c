@@ -1,25 +1,5 @@
 #include "uls.h"
 
-static char *pop_char(char *str, char c);
-static void swap_value(char **tmp, char **result, char v_char);
-static char *del_without_last(char *v_str, char *flags);
-static char *del_char(char *flags, char *v_str);
-
-char *mx_clear_flags(char *flags, char *valid_str) {
-    char **v_arr = mx_strsplit(valid_str, '*');
-    char *result = mx_strdup(flags);
-    char *tmp = NULL;
-
-    for (int i = 0; v_arr[i]; i++) {
-        tmp = mx_strdup(result);
-        mx_strdel(&result);
-        result = del_char(tmp, v_arr[i]);
-        mx_strdel(&tmp);
-    }
-    mx_del_strarr(&v_arr);
-    return result;
-}
-
 static char *pop_char(char *str, char c) {
     char *result = NULL;
     int k = 0;
@@ -65,22 +45,37 @@ static char *del_without_last(char *v_str, char *flags) {
 static char *del_char(char *flags, char *v_str) {
     char *result = NULL;
     char *tmp = NULL;
-    int len = 0;
+    int len = mx_strlen(v_str);
 
     if (!flags || !v_str)
         return NULL;
     result = mx_strdup(flags);
-    len = mx_strlen(v_str);
     if (v_str[0] == '-' && v_str[1] == '-') {
         mx_strdel(&result);
         return del_without_last(&v_str[2], flags);
     }
-    else if (v_str[0] == '-' && v_str[1] != '-')
-        for (int i = 2; i < len; i++)
-            swap_value(&tmp, &result, v_str[i]);
+    else if (v_str[0] == '-' && v_str[1] != '-' 
+        && mx_get_char_index(flags, v_str[1]) >= 0)
+            for (int i = 2; i < len; i++)
+                swap_value(&tmp, &result, v_str[i]);
     else if (v_str[0] == '+' && v_str[1] != '-' 
         && mx_get_char_index(flags, v_str[1]) < 0)
             for (int i = 2; i < len; i++)
                 swap_value(&tmp, &result, v_str[i]);
+    return result;
+}
+
+char *mx_clear_flags(char *flags, char *valid_str) {
+    char **v_arr = mx_strsplit(valid_str, '*');
+    char *result = mx_strdup(flags);
+    char *tmp = NULL;
+
+    for (int i = 0; v_arr[i]; i++) {
+        tmp = mx_strdup(result);
+        mx_strdel(&result);
+        result = del_char(tmp, v_arr[i]);
+        mx_strdel(&tmp);
+    }
+    mx_del_strarr(&v_arr);
     return result;
 }

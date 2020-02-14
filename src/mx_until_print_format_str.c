@@ -1,6 +1,9 @@
 #include "uls.h"
 
-static void print_symbol(char symbol, int number);
+static void print_symbol(char symbol, int number) {
+	for (int i = 0; i < number; i++)
+		mx_printchar(symbol);
+}
 
 void mx_until_print_format_str(char *str, char local, char symbol, int size) {
     int len = mx_strlen(str);
@@ -35,7 +38,3 @@ void mx_until_print_format_l(t_ls *file, t_main *main, int size) {
     }
 }
 
-static void print_symbol(char symbol, int number) {
-	for (int i = 0; i < number; i++)
-		mx_printchar(symbol);
-}

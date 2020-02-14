@@ -1,6 +1,14 @@
 #include "uls.h"
 
-static int get_max_len(t_ls **files);
+static int get_max_len(t_ls **files) {
+    int max_len = 0;
+
+    if (files)
+        for (int i = 0; files[i] != NULL; i++)
+            if (mx_strlen(files[i]->print_name) > max_len)
+                max_len = mx_strlen(files[i]->print_name);
+    return max_len;
+}
 
 void mx_ls_print_big_c(t_ls **files, t_main *main) {
     int row = LEN_TAB * (get_max_len(files) / LEN_TAB) + LEN_TAB;
@@ -21,14 +29,4 @@ void mx_ls_print_big_c(t_ls **files, t_main *main) {
         }
         mx_printchar('\n');
     }
-}
-
-static int get_max_len(t_ls **files) {
-    int max_len = 0;
-
-    if (files)
-        for (int i = 0; files[i] != NULL; i++)
-            if (mx_strlen(files[i]->print_name) > max_len)
-                max_len = mx_strlen(files[i]->print_name);
-    return max_len;
 }

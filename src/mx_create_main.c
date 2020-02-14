@@ -1,7 +1,19 @@
 #include "uls.h"
 
-static bool check_colÎor(char *flags);
-static bool check_isatty();
+static bool check_colÎor(char *flags) {
+    if (mx_ls_check_flag(flags, 'G'))
+        if (isatty(1) != 0)
+            return true;
+    return false;
+}
+
+static bool check_isatty() {
+    bool result = true;
+
+    if (isatty(1) == 0)
+        result = false;
+    return result;
+}
 
 t_main *mx_create_main(int argc, char **argv) {
     t_main *main = malloc(sizeof(t_main));
@@ -21,19 +33,4 @@ t_main *mx_create_main(int argc, char **argv) {
     main->terminal_width = mx_get_terminal_width();
     main->out_in_terminal = check_isatty();
     return main;
-}
-
-static bool check_colÎor(char *flags) {
-    if (mx_ls_check_flag(flags, 'G'))
-        if (isatty(1) != 0)
-            return true;
-    return false;
-}
-
-static bool check_isatty() {
-    bool result = true;
-
-    if (isatty(1) == 0)
-        result = false;
-    return result;
 }
