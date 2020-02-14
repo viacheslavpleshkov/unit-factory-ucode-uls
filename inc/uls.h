@@ -71,7 +71,7 @@ int main(int argc, char **argv);
 t_ls **mx_insort_lstat(char **main_files, t_main *main);
 t_main *mx_create_main(int argc, char **argv);
 void mx_ls(t_main *main);
-void mx_ls_loop(char **files_name, t_main *main);
+void mx_ls_loop(char **files_name, t_main *main, bool prin);
 int mx_files_in_dir(char *dir, int headen);
 char *mx_ls_get_rwx_str(unsigned short int file_mode);
 t_ls **mx_ls_create_struct_arr(int files_number);

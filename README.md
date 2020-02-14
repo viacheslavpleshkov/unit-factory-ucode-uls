@@ -10,9 +10,9 @@
 </p>
 <p align="center">⛏ My own implementation of the famous Unix command: ls</p>
 
-## Used technologies
+## Got skills
 
-C, Makefile, File system, Memory, Terminal, Bash, Unix, CBL framework
+Critical Thinking, Problem Solving, Analysis, Reasoning & Argumentation, Creativity, Agility & Adaptability, Responsibility, Self-Management, Communication, Teamwork, UNIX, Git, Procedural Programming, Algorithms, C
 
 <hr>
 
