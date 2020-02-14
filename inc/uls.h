@@ -96,6 +96,10 @@ int mx_get_terminal_width();
 char mx_ls_get_type(unsigned short int file_mode);
 char mx_ls_get_color(struct stat buf);
 //Print function
+int mx_max_uid_str(t_ls **files);
+int mx_max_gid_str(t_ls **files);
+bool mx_check_character_files(t_ls **files);
+void mx_ls_major_minor(t_ls *files);
 void mx_ls_print(t_ls **files, t_main *main);
 void mx_ls_print_big_c(t_ls **files, t_main *main);
 void mx_ls_print_l(t_ls **files, t_main *main);

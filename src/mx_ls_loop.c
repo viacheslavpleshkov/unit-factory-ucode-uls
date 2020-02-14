@@ -46,8 +46,7 @@ void mx_ls_loop(char **files_name, t_main *main, bool prin) {
         free(files[i]);
         files[i] = mx_get_lstat(files_name[i]);
         if (prin) {
-            //free(&files[i]->print_name); 
-            files[i]->print_name = mx_strdup(files[i]->name); //сдесь возникает лик
+            files[i]->print_name = files[i]->name;
         }
     }
     mx_ls_sort(files, main->flags, main->file_n);

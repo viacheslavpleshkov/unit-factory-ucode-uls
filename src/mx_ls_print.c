@@ -4,7 +4,7 @@ void mx_ls_print(t_ls **files, t_main *main) {
     char *flags = main->flags;
     char *name = NULL;
     
-    if (mx_untill_get_max_size(files) == 1) {
+    if (mx_untill_get_max_size(files) == 1 && !(files[0]->type == 'l')) {
         name = mx_strdup(files[0]->print_name);
         mx_ls_error(ERR_DIR, name);
         mx_strdel(&name);
