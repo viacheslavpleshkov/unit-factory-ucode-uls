@@ -10,7 +10,7 @@ void mx_ls_sort_flag_t(t_ls **arr, int size) {
                 arr[i] = arr[j];
                 arr[j] = temp;
             } else {
-                if (mx_strcmp(arr[i]->name, arr[j]->name) > 0) {
+                if (mx_strcmp(arr[i]->print_name, arr[j]->print_name) > 0) {
                     temp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = temp;
