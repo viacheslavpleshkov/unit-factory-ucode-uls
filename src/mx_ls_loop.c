@@ -18,17 +18,17 @@ static void print_dir_name(char *dir_name) {
 
 static void recursive(t_ls **files, t_main *main) {
     char **memory = NULL;
-    ino_t dev_fd = mx_get_ino_dev_fd();
+    ino_t dev_fd = mx_ls_get_ino_dev_fd();
 
     for (int i = 0; files[i]; i++) {
-        if (files[i]->type == 'd' && mx_ls_check_flag(main->flags, 'R')) {
-            if (mx_ls_check_flag(main->flags, 'a')
+        if (files[i]->type == 'd' && mx_until_check_flag(main->flags, 'R')) {
+            if (mx_until_check_flag(main->flags, 'a')
                 && !check_symbol(files[i]->print_name))
                 continue;
             print_dir_name(files[i]->name);
             if (files[i]->ino == dev_fd)
                 continue;
-            memory = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
+            memory = mx_ls_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
             if (!memory) {
                 mx_ls_error(ERR_EACCES, files[i]->print_name);
                 continue;
@@ -44,7 +44,7 @@ void mx_ls_loop(char **files_name, t_main *main, bool prin) {
     t_ls **files = mx_ls_create_struct_arr(main->file_n);
     for (int i = 0; files_name[i]; i++){
         free(files[i]);
-        files[i] = mx_get_lstat(files_name[i]);
+        files[i] = mx_ls_get_lstat(files_name[i]);
         if (prin) {
             files[i]->print_name = files[i]->name;
         }
@@ -52,5 +52,5 @@ void mx_ls_loop(char **files_name, t_main *main, bool prin) {
     mx_ls_sort(files, main->flags, main->file_n);
     mx_ls_print(files, main);
     recursive(files, main);
-    mx_untill_del_tls(&files);
+    mx_until_del_tls(&files);
 }

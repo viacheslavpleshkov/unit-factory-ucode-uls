@@ -1,6 +1,6 @@
 #include "uls.h"
 
-int mx_untill_get_max_size(t_ls **files) {
+int mx_until_get_max_size(t_ls **files) {
     long long int max_size = 0;
 
     for (int i = 0; files[i]; i++)

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-int mx_files_in_dir(char *dir, int headen) {
+int mx_until_files_in_dir(char *dir, int headen) {
     DIR *folder = opendir(dir);
     struct dirent *temp = NULL;
     int files = 0;

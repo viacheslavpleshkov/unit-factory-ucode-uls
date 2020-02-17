@@ -65,7 +65,7 @@ static char *del_char(char *flags, char *v_str) {
     return result;
 }
 
-char *mx_clear_flags(char *flags, char *valid_str) {
+char *mx_ls_clear_flags(char *flags, char *valid_str) {
     char **v_arr = mx_strsplit(valid_str, '*');
     char *result = mx_strdup(flags);
     char *tmp = NULL;

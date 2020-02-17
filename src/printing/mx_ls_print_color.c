@@ -59,7 +59,7 @@ static void print_color_tree(char type, char *name) {
 }
 
 void mx_ls_print_color(t_ls *ls, bool status) {
-    char *name = mx_validation_name(ls->print_name);
+    char *name = mx_ls_valid_name(ls->print_name);
     
     if (status == true) {
         print_color_one(ls->type, name);

@@ -41,10 +41,10 @@ static void print_link(t_ls *files, int max_nlink_len) {
 void mx_ls_print_l(t_ls **files, t_main *main) {
     char *time_str = NULL;
     char *temp = NULL;
-    bool st = mx_ls_check_flag(main->flags, 'T');
-    int max_uid = mx_max_uid_str(files);
-    int max_gid = mx_max_gid_str(files);
-    bool chararter_files = mx_check_character_files(files);
+    bool st = mx_until_check_flag(main->flags, 'T');
+    int max_uid = mx_until_max_uid_str(files);
+    int max_gid = mx_until_max_gid_str(files);
+    bool chararter_files = mx_ls_check_character_files(files);
 
     print_total(files, main->file_n);
     for (int i = 0; i < main->file_n; i++) {
@@ -52,18 +52,18 @@ void mx_ls_print_l(t_ls **files, t_main *main) {
         time_str = (st) ? mx_strndup(&temp[4], 20) : mx_strndup(&temp[4], 12);
         mx_printchar(files[i]->type);
         print_rwx(files[i]);
-        print_link(files[i], mx_untill_get_max_nlink(files));
+        print_link(files[i], mx_until_get_max_nlink(files));
         mx_until_print_format_str(files[i]->uid_name, 'l', ' ', max_uid);
         mx_printstr("  ");
         mx_until_print_format_str(files[i]->gid_name, 'l', ' ', max_gid);
         if (files[i]->type != 'c' || files[i]->type == 'b') {
             if (!chararter_files)
-                print_size(files[i], mx_untill_get_max_size(files));
+                print_size(files[i], mx_until_get_max_size(files));
             else
-                print_size(files[i], 8 + mx_untill_get_max_size(files));
+                print_size(files[i], 8 + mx_until_get_max_size(files));
         }
         else 
-            mx_ls_major_minor(files[i]);
+            mx_until_major_minor(files[i]);
         mx_printstr(time_str);
         mx_printstr(" ");
         mx_ls_print_color(files[i], main->color);

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-int mx_untill_get_max_nlink(t_ls **files) {
+int mx_until_get_max_nlink(t_ls **files) {
     unsigned int max_nlink = 0;
 
     for (int i = 0; files[i]; i++)

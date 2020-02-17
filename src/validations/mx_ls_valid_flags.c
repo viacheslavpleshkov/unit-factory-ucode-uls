@@ -14,7 +14,7 @@ void print_template(const char *str, char *func_name, char flag, char *valid_fla
     mx_strdel(&tmp);
 }
 
-void mx_valid_flags(char *str, char *func_name, char *flags, char *valid_flags) {
+void mx_ls_valid_flags(char *str, char *func_name, char *flags, char *valid_flags) {
     int len = mx_strlen(str);
 
     if (!str || !func_name || !flags || !valid_flags)
