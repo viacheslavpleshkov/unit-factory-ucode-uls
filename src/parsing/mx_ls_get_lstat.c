@@ -45,7 +45,7 @@ static char *check_file(const char *file, unsigned short int file_mode) {
     return result;
 }
 
-t_ls *mx_get_lstat(const char *file) {
+t_ls *mx_ls_get_lstat(const char *file) {
     struct stat lbuf = get_stat(file, GET_LSTAT);
     t_ls *new_struct = malloc(sizeof(t_ls));
     char *gid_name = mx_ls_get_gid_name(lbuf.st_gid);

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char *mx_validation_name(char *name) {
+char *mx_ls_valid_name(char *name) {
     char *namerepleca = NULL;
     char *namereplecatwo = NULL;
 

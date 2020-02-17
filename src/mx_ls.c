@@ -1,6 +1,6 @@
 #include "uls.h"
 
-static bool check_link_dir(char *file);
+static void check_link_dir(t_ls *file);
 
 static t_ls *print_dir_name(t_ls *file, t_main *main) {
     struct stat buf;
@@ -16,7 +16,7 @@ static t_ls *print_dir_name(t_ls *file, t_main *main) {
             buf_size = buf.st_size + 1;
             link = malloc(buf_size);
             readlink(file->name, link, buf_size);
-            result = mx_get_lstat(link);
+            result = mx_ls_get_lstat(link);
             result->print_name = mx_strdup(file->name);
             result->type = 'd';
     }
@@ -30,7 +30,7 @@ static t_ls *print_dir_name(t_ls *file, t_main *main) {
 
 void static print_dir(t_ls **files, t_main *main) {
     char **mem = NULL;
-    ino_t dev_fd = mx_get_ino_dev_fd();
+    ino_t dev_fd = mx_ls_get_ino_dev_fd();
 
     for (int i = 0; files[i]; i++) {
         if (files[i]->type == 'd' || files[i]->type == 'l') {
@@ -38,7 +38,7 @@ void static print_dir(t_ls **files, t_main *main) {
                 continue;
             if (!(i == 0 && files[i + 1] == NULL))
                 files[i] = print_dir_name(files[i], main);
-            mem = mx_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
+            mem = mx_ls_read_dir(files[i]->name, mx_ls_get_hidden(main->flags));
             if (!mem) {
                 mx_ls_error(ERR_EACCES, files[i]->print_name);
                 continue;
@@ -57,10 +57,10 @@ void static print_files_without_dir(t_main *main) {
 
     for (int i = 0; main->files_struct[i]; i++) {
         files_without_dir[k] = mx_strdup(main->files_struct[i]->name);
-        if (main->files_struct[i]->type != 'd' 
-            && check_link_dir(main->files_struct[i]->name))
-                k++;
-        else
+        if (main->files_struct[i]->type != 'd') {
+            check_link_dir(main->files_struct[i]);
+            k++;
+        } else
             mx_strdel(&files_without_dir[k]);
     }
     mx_ls_loop(files_without_dir, main, true);
@@ -69,31 +69,31 @@ void static print_files_without_dir(t_main *main) {
 
 }
 
-static bool check_link_dir(char *file) {
-    struct stat buf;
-    struct stat lbuf;
-    int res = 0;
-
-    res = stat(file, &buf);
-    lstat(file, &lbuf);
+static void check_link_dir(t_ls *file) {
+    if (file->type == 'c') {
+        printf("%c", file->type);
+    }
     
-    if (res == -1)
-        mx_ls_error(ERR_DIR, file);
-    if ((lbuf.st_mode & S_IFMT) == S_IFDIR 
-        && (buf.st_mode & S_IFMT) == S_IFLNK)
-        return true;
-    return false;
+    // structcstat lbuf;
+    // int res = 0;
+
+    // res = stat(file->name, &buf);
+    // lstat(file->name, &lbuf);
+    // if(&& ((lbuf.st_mode & S_IFMT) == S_IFDIR && (buf.st_mode & S_IFMT) == S_IFLNK))
+    // if (res == -1)
+    //     mx_ls_error(ERR_DIR, file);
+    //     exit(1);
 }
 
 void mx_ls(t_main *main) {
     char **memory = NULL;
 
     if (!main->str_size) {
-        memory = mx_read_dir(".", mx_ls_get_hidden(main->flags));
+        memory = mx_ls_read_dir(".", mx_ls_get_hidden(main->flags));
         mx_ls_loop(memory, main, false);
         mx_del_strarr(&memory);
     }
-    main->files_struct = mx_insort_lstat(main->files, main);
+    main->files_struct = mx_ls_insort_lstat(main->files, main);
     print_files_without_dir(main);
-    mx_untill_del_tls(&main->files_struct);
+    mx_until_del_tls(&main->files_struct);
 }

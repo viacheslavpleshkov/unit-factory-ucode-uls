@@ -1,7 +1,6 @@
 #include "uls.h"
 
 char mx_ls_get_type(unsigned short int file_mode) {
-
     if ((file_mode & S_IFMT) == S_IFBLK)
         return 'b';
     else if (((file_mode & S_IFMT) == S_IFREG) && (

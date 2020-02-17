@@ -6,7 +6,7 @@ static void mx_strdel_tls(t_ls **str) {
     *str = NULL;
 }
 
-void mx_untill_del_tls(t_ls ***arr) {
+void mx_until_del_tls(t_ls ***arr) {
     int i = 0;
 
     while ((*arr)[i]) {

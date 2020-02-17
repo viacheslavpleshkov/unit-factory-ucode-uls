@@ -1,7 +1,7 @@
 
 #include "uls.h"
 
-void mx_ls_major_minor(t_ls *files) {
+void mx_until_major_minor(t_ls *files) {
     char *major = mx_itoa((int)files->file_major);
     char *minor = mx_itoa((int)files->file_minor);
 

@@ -1,6 +1,6 @@
 #include "uls.h"
 
-char *mx_create_flags_str(char **argv, int argc) {
+char *mx_ls_create_flags_str(char **argv, int argc) {
     char *flags = NULL;
     char *temp = NULL;
 

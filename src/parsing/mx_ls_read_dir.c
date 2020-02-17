@@ -11,10 +11,10 @@ static bool get_result(char *d_name, int headen, int *i) {
     return false;
 }
 
-char **mx_read_dir(char *dir, int headen) {
+char **mx_ls_read_dir(char *dir, int headen) {
     DIR *folder = opendir(dir);
     struct dirent *temp = NULL;
-    int files = mx_files_in_dir(dir, headen);
+    int files = mx_until_files_in_dir(dir, headen);
     char **result = NULL;
 
     if (!folder) 
