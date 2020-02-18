@@ -28,7 +28,7 @@ It's pretty simple, instead of calling `ls`, call `./uls` from the root director
 
 ## Supported flags
 ```
-usage: uls [-ACGRSTaclmrstu1] [file ...]
+usage: uls [-ACGRSTaclmrtu1] [file ...]
 ```
 - Long listing display: -l
 - Display recursively: -R
@@ -37,6 +37,7 @@ usage: uls [-ACGRSTaclmrstu1] [file ...]
 - Sort by modification date: -t
 - Display one entry per line: -1
 - Column display: -C
+- Display with a comma separated list of entries: -m
 - Sort by creation date: -U
 - Sort by last access date: -a
 - Sort by last status change date: -c

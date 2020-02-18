@@ -24,7 +24,7 @@
 #define LS_HIDDEN_A 2
 
 #define LS_VALID_STR "&func_name: illegal option -- &invalflag \nusage: &func_name  [-&val_flags]] [file ...]"
-#define LS_VALID_FLAGS "ACGRSTaclmrstu1"
+#define LS_VALID_FLAGS "ACGRSTaclmrtu1"
 #define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS*--1Cml"
 #define LS_FUNC_NAME "uls"
 
