@@ -5,6 +5,6 @@ int main(int argc, char **argv) {
 
     main = mx_ls_create_main(argc, argv);
     mx_ls(main);
-    return(1);
+    return(0);
 }
 
