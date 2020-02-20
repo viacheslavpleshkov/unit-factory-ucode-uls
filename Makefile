@@ -133,7 +133,7 @@ uls : $(SRC) inc/uls.h libmx/libmx.a
 	@$(CC) $(CFLAGS) -c $(SRC) $(foreach d, $(INC), -I $d)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBMXF)/$(LIB_NAME) -o $(APP_NAME)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
-	@mkdir $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	@mv $(OBJ) $(OBJ_DIR)
 
 uninstall : clean
