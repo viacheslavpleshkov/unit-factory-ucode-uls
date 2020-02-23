@@ -23,15 +23,18 @@
 #define LS_HIDDEN_a 1
 #define LS_HIDDEN_A 2
 
-#define LS_VALID_STR "&func_name: illegal option -- &invalflag \nusage: &func_name  [-&val_flags]] [file ...]"
+#define LS_VALID_STR_ONE "&func_name: illegal option -- &invalflag \n"
+#define LS_VALID_STR_TWO "usage: &func_name  [-&val_flags]] [file ...]"
 #define LS_VALID_FLAGS "ACGRSTaclmrtu1"
 #define LS_CLEAR_STR "*-aA*+lh@eT*--rtucS*--1Cml"
 #define LS_FUNC_NAME "uls"
 
+#define LS_HALF_YEAR 15552000
+
 typedef enum e_error {
     ERR_EACCES,
     ERR_DIR,
-} t_error;
+}            t_error;
 
 //Struct
 typedef struct s_ls {
@@ -53,7 +56,18 @@ typedef struct s_ls {
     ino_t ino;               //file serial number
     int file_minor;
     int file_major;
-} t_ls;
+}              t_ls;
+
+typedef struct s_ls_print_l {
+    bool st;
+    int max_uid;
+    int max_gid;
+    bool chararter_files;
+    int max_size;
+    time_t cur_time;
+    bool check_dir;
+    int max_link;
+}              t_ls_print_l;
 
 typedef struct s_main {
     char **files;
@@ -64,7 +78,7 @@ typedef struct s_main {
     int file_n;
     int terminal_width;
     bool out_in_terminal;
-} t_main;
+}              t_main;
 
 //Official function
 int main(int argc, char **argv);
@@ -75,18 +89,20 @@ char *mx_ls_create_flags_str(char **argv, int argc);
 t_main *mx_ls_create_main(int argc, char **argv);
 char **mx_ls_create_param_arr(char **argv, int argc);
 t_ls **mx_ls_create_struct_arr(int files_number);
+t_ls_print_l *mx_ls_create_struct_print_l(t_ls **files, t_main *main);
 //Inserts function
 t_ls **mx_ls_insort_lstat(char **main_files, t_main *main);
 //Validation function
 void mx_ls_error(t_error err, char *s);
-void mx_ls_valid_flags(char *str, char *func_name, char *flags, char *valid_flags);
+void mx_ls_valid_flags(char *str, char *f_name, char *flags, char *v_flags);
 char *mx_ls_clear_flags(char *flags, char *valid_str);
 char *mx_ls_valid_name(char *name);
 bool mx_ls_check_character_files(t_ls **files);
 //Parse function
-ino_t mx_ls_get_ino_dev_fd();
+ino_t mx_ls_get_ino_dev_fd(void);
 t_ls *mx_ls_get_lstat(const char *file);
-int mx_ls_get_terminal_width();
+int mx_ls_get_terminal_width(void);
+char *mx_ls_get_time_str(t_ls *file, t_ls_print_l *print_struct);
 char *mx_ls_get_acl_inf(const char *file);
 char mx_ls_get_color(struct stat buf);
 char *mx_ls_get_gid_name(int st_gid);
@@ -95,6 +111,7 @@ char *mx_ls_get_print_name(const char *file);
 char *mx_ls_get_rwx_str(unsigned short int file_mode);
 char mx_ls_get_type(unsigned short int file_mode);
 char *mx_ls_get_uid_name(int st_uid);
+int mx_ls_get_xattr(char *file);
 char **mx_ls_read_dir(char *dir, int headen);
 //Print function
 void mx_ls_print_big_c(t_ls **files, t_main *main);
@@ -103,6 +120,7 @@ void mx_ls_print_l(t_ls **files, t_main *main);
 void mx_ls_print_link_name(const char *file);
 void mx_ls_print_m(t_ls **files, t_main *main);
 void mx_ls_print_one(t_ls **files, t_main *main);
+void mx_ls_print_rwx(t_ls *files);
 void mx_ls_print(t_ls **files, t_main *main);
 //Sort function
 void mx_ls_sort(t_ls **files, char *flags, int size);
