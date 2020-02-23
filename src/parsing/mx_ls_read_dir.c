@@ -4,8 +4,8 @@ static bool get_result(char *d_name, int headen, int *i) {
     if (headen == LS_HIDDEN_NOT && d_name[0] == '.')
         *i -= 1;
     else if (headen == LS_HIDDEN_A && (!mx_strcmp(d_name, ".")
-        || !mx_strcmp(d_name, "..")))
-            *i -=1;
+             || !mx_strcmp(d_name, "..")))
+        *i -=1;
     else
         return true;
     return false;

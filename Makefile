@@ -17,6 +17,7 @@ SRC = $(addprefix $(SRC_DIR)/,\
 	creating/mx_ls_create_main.c \
 	creating/mx_ls_create_param_arr.c \
 	creating/mx_ls_create_struct_arr.c \
+	creating/mx_ls_create_struct_print_l.c \
 	inserts/mx_ls_insert_lstat.c \
 	parsing/mx_ls_get_acl_inf.c \
 	parsing/mx_ls_get_color.c \
@@ -27,8 +28,10 @@ SRC = $(addprefix $(SRC_DIR)/,\
 	parsing/mx_ls_get_print_name.c \
 	parsing/mx_ls_get_rwx_str.c \
 	parsing/mx_ls_get_terminal_width.c \
+	parsing/mx_ls_get_time_str.c \
 	parsing/mx_ls_get_type.c \
 	parsing/mx_ls_get_uid_name.c \
+	parsing/mx_ls_get_xattr.c \
 	parsing/mx_ls_read_dir.c \
 	printing/mx_ls_print_big_c.c \
 	printing/mx_ls_print_color.c \
@@ -36,6 +39,7 @@ SRC = $(addprefix $(SRC_DIR)/,\
 	printing/mx_ls_print_link_name.c \
 	printing/mx_ls_print_m.c \
 	printing/mx_ls_print_one.c \
+	printing/mx_ls_print_rwx.c \
 	printing/mx_ls_print.c \
 	sortings/mx_ls_sort.c \
 	sortings/mx_ls_sort_default.c \
@@ -70,6 +74,7 @@ OBJ = \
 	mx_ls_create_main.o \
 	mx_ls_create_param_arr.o \
 	mx_ls_create_struct_arr.o \
+	mx_ls_create_struct_print_l.o \
 	mx_ls_insert_lstat.o \
 	mx_ls_get_acl_inf.o \
 	mx_ls_get_color.o \
@@ -80,8 +85,10 @@ OBJ = \
 	mx_ls_get_print_name.o \
 	mx_ls_get_rwx_str.o \
 	mx_ls_get_terminal_width.o \
+	mx_ls_get_time_str.o \
 	mx_ls_get_type.o \
 	mx_ls_get_uid_name.o \
+	mx_ls_get_xattr.o \
 	mx_ls_read_dir.o \
 	mx_ls_print_big_c.o \
 	mx_ls_print_color.o \
@@ -89,6 +96,7 @@ OBJ = \
 	mx_ls_print_link_name.o \
 	mx_ls_print_m.o \
 	mx_ls_print_one.o \
+	mx_ls_print_rwx.o \
 	mx_ls_print.o \
 	mx_ls_sort_default.o \
 	mx_ls_sort_flag_big_s.o \

@@ -5,7 +5,8 @@ void mx_ls_sort_flag_t(t_ls **arr, int size) {
 
     for (int i = 0; i < size; ++i) {
         for (int j = i; j < size; ++j) {
-            if ((arr[i]->mtime < arr[j]->mtime) && arr[i]->mtime != arr[j]->mtime) {
+            if ((arr[i]->mtime < arr[j]->mtime) 
+                && arr[i]->mtime != arr[j]->mtime) {
                 temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
